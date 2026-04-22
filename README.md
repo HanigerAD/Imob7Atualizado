@@ -1,3 +1,22 @@
+## ⚠️ IMPORTANTE - CONFIGURAÇÃO DO WHATSAPP
+
+Para o sistema funcionar corretamente:
+
+1. Acesse o arquivo:
+   Script-botao-whatsapp-flutuando-numero-header.txt
+
+2. Copie todo o conteúdo
+
+3. Cole dentro do arquivo:
+   index.html (na raiz do projeto)
+
+4. Preferencialmente antes do fechamento da tag </body>
+
+---
+
+Sem isso, o botão de WhatsApp não funcionará corretamente.
+
+
 # Imobiliaria 7 de Setembro
 Repositorio com o codigo de [API](#api), [FRONTEND](#frontend) e [ADMIN](#admin)
 
