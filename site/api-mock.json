@@ -1,0 +1,20 @@
+{
+  "site": { "name": "Dev", "ok": true },
+  "banners": [],
+  "sobreNosBanner": [],
+  "imoveis": [
+    {
+      "id": 1,
+      "titulo": "Apto 2D no Centro",
+      "preco": 250000,
+      "cidade": "Guaíba",
+      "bairro": "Centro",
+      "quartos": 2,
+      "banheiros": 1,
+      "area": 58,
+      "imagem": "https://picsum.photos/seed/apt1/600/400",
+      "ativo": true
+    }
+  ]
+}
+

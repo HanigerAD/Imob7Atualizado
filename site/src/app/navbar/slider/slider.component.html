@@ -1,0 +1,4 @@
+<div class="navbar-slider">
+    <img *ngFor="let image of images; index as key;" [src]="image" alt=""
+        [class]="key == currentBannerIndex ? 'selected' : ''" />
+</div>

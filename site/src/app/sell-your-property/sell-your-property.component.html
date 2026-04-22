@@ -1,0 +1,243 @@
+<header>
+    <div class="bg-theme-overlay fadein-page" [style]="banner">
+        <section class="section__breadcrumb ">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <h2 class="text-capitalize text-white">Comercialize seu imóvel</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- END BREADCRUMB -->
+</header>
+<div class="clearfix"></div>
+
+<!-- Form contact -->
+<form [formGroup]="form" (submit)="sendNewProperty()">
+<section class="wrap__contact-form fadein-page-slow">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h5>Dados de contato</h5>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group form-group-name">
+                            <label>Nome completo<span class="required"></span></label>
+                            <input formControlName="fullname" type="text" class="form-control" name="name" required="">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group form-group-name">
+                            <label>E-mail <span class="required"></span></label>
+                            <input formControlName="email" type="email" class="form-control" name="email" required="">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group form-group-name">
+                            <label>Telefone <span class="required"></span></label>
+                            <input formControlName="phone" type="text" class="form-control" name="phone" required="" [mask]="'(00) 0 0000-0000'">
+
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="mt-5">Características do imóvel</h5>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group form-group-name">
+                            <label>Endereço completo<span class="required"></span></label>
+                            <input formControlName="address" type="text" class="form-control" name="address" required="">
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-group-name">
+                            <label>Estado <span class="required"></span></label>
+                            <div class="form-group">
+                                <select class="wide select_option form-control" id="uf" name="uf" formControlName="uf">
+                                    <option value="AC">Acre</option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="PE">Pernambuco</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RS" selected>Rio Grande do Sul</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="RR">Roraima</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="TO">Tocantins</option>
+                                    <option value="EX">Estrangeiro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group form-group-name">
+                            <label>Cidade<span class="required"></span></label>
+                            <input formControlName="city" type="text" class="form-control" name="name" required="">
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-group-name">
+                            <label>Bairro<span class="required"></span></label>
+                            <input formControlName="neighborhood" type="text" class="form-control" name="name">
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-group-name">
+                            <label>Tipo <span class="required"></span></label>
+                            <div class="form-group">
+                                <select class="wide select_option form-control"
+                                        formControlName="type">
+                                    <option data-display="state" value="Residencial" selected> Residencial </option>
+                                    <option data-display="state" value="Comercial"> Comercial </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group form-group-name">
+                            <label>Área privativa (m²)<span class="required"></span></label>
+                            <input formControlName="privativeArea" type="number" class="form-control" name="name" required="">
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group form-group-name">
+                            <label>Área total (m²)<span class="required"></span></label>
+                            <input formControlName="totalArea" type="number" class="form-control" name="name" required="">
+
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group form-group-name">
+                            <label>Vagas <span class="required"></span></label>
+                            <div class="form-group">
+                                <select class="wide select_option form-control"
+                                        formControlName="parking">
+                                    <option data-display="state" value="0" selected> 0 </option>
+                                    <option data-display="state" value="1" selected> 1 </option>
+                                    <option data-display="state" value="2" selected> 2 </option>
+                                    <option data-display="state" value="3" selected> 3 </option>
+                                    <option data-display="state" value="4" selected> 4 </option>
+                                    <option data-display="state" value="5" selected> 5 </option>
+                                    <option data-display="state" value="6" selected> 6 </option>
+                                    <option data-display="state" value="7" selected> 7 </option>
+                                    <option data-display="state" value="8" selected> 8 </option>
+                                    <option data-display="state" value="9" selected> 9 </option>
+                                    <option data-display="state" value="10" selected> 10 </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group form-group-name">
+                            <label>Dormitórios <span class="required"></span></label>
+                            <div class="form-group">
+                                <select class="wide select_option form-control"
+                                        formControlName="bedrooms">
+                                    <option data-display="state" value="0" selected> 0 </option>
+                                    <option data-display="state" value="1" selected> 1 </option>
+                                    <option data-display="state" value="2" selected> 2 </option>
+                                    <option data-display="state" value="3" selected> 3 </option>
+                                    <option data-display="state" value="4" selected> 4 </option>
+                                    <option data-display="state" value="5" selected> 5 </option>
+                                    <option data-display="state" value="6" selected> 6 </option>
+                                    <option data-display="state" value="7" selected> 7 </option>
+                                    <option data-display="state" value="8" selected> 8 </option>
+                                    <option data-display="state" value="9" selected> 9 </option>
+                                    <option data-display="state" value="10" selected> 10 </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="mt-5">Dados complementares</h5>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group form-group-name">
+                            <label>Valor condomínio (R$) <span class="required"></span></label>
+                            <input formControlName="condominium" type="text" class="form-control" name="name" required="" [mask]="'00.000,00'">
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group form-group-name">
+                            <label>IPTU (R$) <span class="required"></span></label>
+                            <input formControlName="iptu" type="text" class="form-control" name="email" required="" [mask]="'00.000,00'">
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-group-name">
+                            <label>Finalidade <span class="required"></span></label>
+                            <div class="form-group">
+                                <select class="wide select_option form-control"
+                                        formControlName="finality">
+                                    <option data-display="finality" value="Aluguel" selected> Aluguel </option>
+                                    <option data-display="finality" value="Venda" selected> Venda </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group form-group-name">
+                            <label>Imóvel está pago? <span class="required"></span></label>
+                            <div class="form-group">
+                                <select class="wide select_option form-control"
+                                        formControlName="paidout">
+                                    <option data-display="state" value="Sim" selected> Sim </option>
+                                    <option data-display="state" value="Não" selected> Não </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group form-group-name">
+                            <label>Valor (R$)<span class="required"></span></label>
+                            <input formControlName="price" type="text" class="form-control" name="email" required="" [mask]="'000.000.000,00'">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group form-group-name">
+                            <div class="form-group">
+                                <label>Descrição </label>
+                                <textarea formControlName="description" class="form-control" rows="9" name="message"></textarea>
+                            </div>
+                            <div class="form-group float-right mb-0">
+                                <button type="submit" class="btn btn-primary btn-contact">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Form contact  -->
+</form>

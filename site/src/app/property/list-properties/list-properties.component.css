@@ -1,0 +1,72 @@
+.image-watermark {
+    overflow:hidden;
+}
+
+.watermark-position {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.watermark {
+    position:relative;
+    top: -50px;
+    height: 50px;
+}
+
+.watermark-large {
+    position:relative;
+    top: -590px;
+    height: 100px;
+}
+
+
+.watermark-small {
+    position:relative;
+    top: -150px;
+    height: 50px;
+}
+
+.bankable {
+    -webkit-transform: scale(2);
+}
+
+.info-bankable {
+    margin-right: 60px;
+    background-color: green;
+}
+
+.no-properties-message {
+    display: flex;
+    justify-content: center;
+    margin-top: 35%;
+}
+
+.loading-icon {
+    display: flex;
+    justify-content: center;
+    font-size: 100px;
+    margin-top: 35%;
+}
+
+.neighborhood-item {
+  display: flex;
+  align-items: baseline;
+  margin-left: 10px;
+}
+
+#scrollable-checkbox-list {
+  max-height: 140px;
+  overflow-y: scroll;
+  padding: 10px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc #f0f0f0;
+}
+
+h3.text-capitalize,
+h4.text-capitalize,
+h5.text-capitalize,
+h6.text-capitalize {
+  text-transform: none !important;
+}

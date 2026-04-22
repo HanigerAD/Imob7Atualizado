@@ -1,0 +1,59 @@
+
+.image-watermark {
+    margin-bottom:-49px;
+    overflow:hidden;
+}
+
+.watermark-position {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.watermark {
+    position:relative;
+    top: -50px;
+    height: 50px;
+}
+
+.watermark-large {
+    position:relative;
+    top: -470px;
+    height: 50px;
+}
+
+
+.watermark-small {
+    position:relative;
+    top: -180px;
+    height: 50px;
+}
+
+.financeable-label {
+    background-color: forestgreen;
+    border-radius: 5px;
+    padding: 0 8px 0 8px;
+    font-weight: bolder;
+}
+
+.post-keys {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+.post-key-label {
+    background-color: #002247;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #FFFFFF;
+    font-size:14px;
+    font-family:"Open Sans",sans-serif;
+}
+
+h3.text-capitalize,
+h4.text-capitalize,
+h5.text-capitalize,
+h6.text-capitalize {
+  text-transform: none !important;
+}
+

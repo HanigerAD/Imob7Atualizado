@@ -1,0 +1,148 @@
+<header>
+<div class="bg-theme-overlay fadein-page" [style]="banner">
+    <section class="section__breadcrumb ">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8 text-center">
+                    <h2 class="text-capitalize text-white"> Notícias </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- END BREADCRUMB -->
+</header>
+<div class="clearfix"></div>
+
+<!-- BLOG -->
+<section>
+    <div class="container fadein-page-slow">
+        <div class="row">
+            <!-- BLOG START -->
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6" *ngFor="let post of postsList" (click)="viewPost(post.code)">
+                        <div class="blog__grid mt-0">
+                            <!-- BLOG  -->
+                            <div class="card__image">
+                                <div class="card__image-header h-250">
+                                    <img [src]="getImage(post.image)" alt=""
+                                         class="img-fluid w100 img-transition">
+
+                                    <div class="row post-keys">
+                                        <div class="col post-key-label" *ngFor="let keyword of post.keywords">
+                                            {{ keyword.toUpperCase() }}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="card__image-body">
+                                    <!-- <span class="badge badge-secondary p-1 text-capitalize mb-3">May 08, 2019
+                                    </span> -->
+                                    <h6 class="text-capitalize">
+                                        <a (click)="seePost(post.code)"> {{ post.title }} </a>
+                                    </h6>
+                                    <div class=" mb-0" innerHTML="{{ post.text.slice(0, 150) }}...">
+                                    </div>
+
+
+                                </div>
+                                <div class="card__image-footer">
+                                    <ul class="list-inline my-auto">
+                                        <li class="list-inline-item">
+                                            <a href="#">
+                                                {{ post.user }}
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                    <ul class="list-inline my-auto ml-auto">
+                                        <li class="list-inline-item">
+                                            <a class="btn btn-sm btn-primary "><small
+                                                    class="text-white" (click)="viewPost(post.code)">Leia mais<i
+                                                    class="fa fa-angle-right ml-1"></i></small></a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- END BLOG -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END BLOG  -->
+
+            <!-- WIDGET BLOG -->
+            <div class="col-lg-4">
+                <div class="sticky-top">
+                    <aside>
+                        <div class="widget__sidebar mt-0">
+                            <div class="widget__sidebar__header">
+                                <h6 class="text-capitalize">Pesquisa</h6>
+                            </div>
+                            <div class="widget__sidebar__body">
+                                <div class="input-group">
+                                    <form [formGroup]="searchForm">
+                                        <input type="text" name="search_term_string" class="form-control" formControlName="search"
+                                               placeholder="Procurar artigo..." (ngModelChange)="searchArticle()">
+                                    </form>
+                                    <span class="input-group-btn">
+                                            <button type="submit" class="btn-search btn"><i
+                                                    class="fa fa-search"></i></button>
+                                        </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </aside>
+                    <aside>
+                        <div class="widget__sidebar">
+                            <div class="widget__sidebar__header">
+                                <h6 class="text-capitalize">Notícias recentes</h6>
+                            </div>
+                            <div class="widget__sidebar__body">
+                                <div class="row">
+                                    <div class="col-md-12 cursor-pointer" *ngFor="let post of posts.slice(-5)" (click)="viewPost(post.code)">
+                                        <div class="widget__sidebar__body-img">
+                                            <div class="widget__sidebar__body-heading">
+                                                <h6 class="text-capitalize">
+                                                    {{ post.title }}
+                                                </h6>
+                                            </div>
+                                            <span class="badge badge-secondary p-1 text-capitalize mb-1"> {{ getFormatedDate(post.createDate) }} </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                    <aside>
+                        <div class="widget__sidebar">
+                            <div class="widget__sidebar__header">
+                                <h6 class="text-capitalize">tags</h6>
+                            </div>
+                            <div class="widget__sidebar__body">
+                                <div class="blog__tags p-0">
+                                    <ul class="list-inline">
+
+                                        <li class="list-inline-item cursor-pointer" *ngFor="let keyword of keywords" (click)="filterByKeyword(keyword)">
+                                            <a>
+                                                #{{ keyword }}
+                                            </a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </aside>
+                </div>
+            </div>
+            <!-- END WIDGET BLOG -->
+        </div>
+    </div>
+</section>
+<!-- END LISTING LIST -->

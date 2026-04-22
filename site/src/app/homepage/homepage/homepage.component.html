@@ -1,0 +1,251 @@
+<!-- MOST POPULAR PLACES -->
+<section class="wrap__heading" *ngIf="featuredPropertiesToRent.length || featuredPropertiesToSell.length">
+  <div class="container" *ngIf="featuredPropertiesToRent.length > 0">
+    <div class="row">
+      <div class="col-md-8 col-lg-6 mx-auto">
+        <div class="title__head">
+          <h2 class="text-center text-capitalize">
+            Imóveis destaque para Locação
+          </h2>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 col-lg-4" *ngFor="let property of featuredPropertiesToRent">
+        <a class="card__image card__box-v1"
+   href="#/detalhes-imovel/{{ property.code }}"
+   target="_blank">
+          <div class="card__image-header h-250 img-space">
+            <div class="image-watermark">
+              <img [src]="getPropertyImage(property.photo)" alt="" class="img-fluid w100 img-transition" />
+            </div>
+            <div class="custom-card-info">
+              <div class="custom-card-info-item custom-card-info-item-bankable" *ngIf="property.financeable">
+                Financiável
+              </div>
+              <div class="custom-card-info-item"> {{ property.transaction }} </div>
+            </div>
+          </div>
+
+          <div class="card__image-body">
+            <span class="badge badge-primary text-capitalize mb-2"> {{ property.category }} </span>
+            <h6 class="text-capitalize">
+              Código {{ property.internalCode }} - {{ property.title }}
+            </h6>
+
+            <p class="text-capitalize">
+              <i class="fa fa-map-marker"></i>
+              {{ property.neighborhood }}, {{ property.city }}
+            </p>
+            <ul class="list-inline card__content">
+              <li class="list-inline-item"></li>
+              <li class="list-inline-item" *ngIf="property.bedroom">
+                <span>
+                  Dormitórios <br />
+                  <i class="fa fa-bed"></i> {{ property.bedroom }}
+                </span>
+              </li>
+              <li class="list-inline-item" *ngIf="property.totalArea">
+                <span>
+                  Área <br />
+                  <i class="fa fa-map"></i> {{ property.totalArea }}m²
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card__image-footer">
+            <ul class="list-inline my-auto ml-auto">
+              <li class="list-inline-item">
+                <h6 class="text-primary">
+                  {{ property.price && property.price !== "0.00" ? 'R$' + converterParaMoeda(property.price, false) : 'A
+                  CONSULTAR' }}
+                </h6>
+              </li>
+            </ul>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" *ngIf="featuredPropertiesToSell.length > 0">
+    <div class="row mt-5">
+      <div class="col-md-8 col-lg-6 mx-auto">
+        <div class="title__head">
+          <h2 class="text-center text-capitalize">
+            Imóveis destaque para Venda
+          </h2>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 col-lg-4" *ngFor="let property of featuredPropertiesToSell">
+        <a class="card__image card__box-v1"
+   href="#/detalhes-imovel/{{ property.code }}"
+   target="_blank">
+
+          <div class="card__image-header h-250 img-space">
+            <div class="image-watermark">
+              <img [src]="getPropertyImage(property.photo)" alt="" class="img-fluid w100 img-transition" />
+            </div>
+            <div class="custom-card-info">
+              <div class="custom-card-info-item custom-card-info-item-bankable" *ngIf="property.financeable">
+                Financiável
+              </div>
+              <div class="custom-card-info-item"> {{ property.transaction }} </div>
+            </div>
+          </div>
+
+          <div class="card__image-body">
+            <span class="badge badge-primary text-capitalize mb-2"> {{ property.category }} </span>
+
+            <h6 class="text-capitalize">
+              Código {{ property.internalCode }} - {{ property.title }}
+            </h6>
+
+            <p class="text-capitalize">
+              <i class="fa fa-map-marker"></i>
+              {{ property.neighborhood }}, {{ property.city }}
+            </p>
+
+            <ul class="list-inline card__content">
+              <li class="list-inline-item"></li>
+
+              <li class="list-inline-item" *ngIf="property.bedroom">
+                <span>
+                  Dormitórios <br />
+                  <i class="fa fa-bed"></i> {{ property.bedroom }}
+                </span>
+              </li>
+
+              <li class="list-inline-item" *ngIf="property.totalArea">
+                <span>
+                  Área <br />
+                  <i class="fa fa-map"></i> {{ property.totalArea }}m²
+                </span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="card__image-footer">
+            <ul class="list-inline my-auto ml-auto">
+              <li class="list-inline-item">
+                <h6 class="text-primary">
+                  {{ property.price && property.price !== "0.00" ? 'R$' + converterParaMoeda(property.price, false) : 'A
+                  CONSULTAR' }}
+                </h6>
+              </li>
+            </ul>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- END MOST POPULAR PLACES -->
+
+
+
+
+<!-- ABOUT -->
+<section class="home__about bg-theme-v4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="title__leading">
+          <!-- <h6 class="text-uppercase">trusted By thousands</h6> -->
+          <h2 class="text-capitalize"> ENCONTRE O MELHOR LUGAR PARA VIVER </h2>
+          <p class="text-dark">
+            Nossa equipe de profissionais está a sua disposição!
+
+            Encontre os melhores imóveis através de nossos agentes.
+          </p>
+
+          <!--                    <a href="#" class="btn btn-primary mt-3 text-capitalize"> read more-->
+          <!--                        <i class="fa fa-angle-right ml-3 "></i></a>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="bg-theme-v1" [style]="banner">
+  <div class="cta">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-12 col-lg-12 text-center">
+          <h2 class="text-uppercase text-white">Já encontrou seu imóvel?</h2>
+          <p class="text-capitalize text-white">Simule seu financiamento com nossos parceiros!</p>
+          <a (click)="redirectToPartners()" class="btn btn-primary text-white">Realize sua simulação
+            <i class="fa fa-angle-right ml-3 arrow-btn "></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- BLOG -->
+<section class="blog__home" *ngIf="posts.length">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-lg-6 mx-auto">
+        <div class="title__head">
+          <h2 class="text-center text-capitalize">
+            Últimas novidades de nosso blog
+          </h2>
+          <p class="text-center text-capitalize"> </p>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="row">
+      <a class="col-md-4" *ngFor="let post of posts" [routerLink]="['/artigo/' + post.code]">
+        <!-- BLOG  -->
+        <div class="card__image">
+          <div class="card__image-header h-250">
+            <img [src]="getImageUrl(post?.image)" alt="" class="img-fluid w100 img-transition">
+            <div class="row post-keys">
+              <div class="col post-key-label" *ngFor="let keyword of post.keywords">
+                {{ keyword.toUpperCase() }}
+              </div>
+            </div>
+          </div>
+          <div class="card__image-body">
+            <span class="badge badge-secondary p-1 text-capitalize mb-3"> {{ getDate(post?.createDate) }}
+            </span>
+            <h6 class="text-capitalize">
+              <a href="/blog-single.html"> {{ post?.title }} </a>
+            </h6>
+            <div class=" mb-0" [innerHTML]="post?.text.slice(0,150)"></div>...
+          </div>
+          <div class="card__image-footer">
+            <ul class="list-inline my-auto">
+              <li class="list-inline-item ">
+                <a href="#">
+                  {{ post?.user?.name }}
+                </a>
+
+              </li>
+            </ul>
+            <ul class="list-inline my-auto ml-auto">
+              <li class="list-inline-item ">
+                <a class="btn btn-sm btn-primary "><small class="text-white ">Leia mais<i
+                      class="fa fa-angle-right ml-1"></i></small></a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+        <!-- END BLOG -->
+      </a>
+    </div>
+  </div>
+</section>
+<!-- END BLOG -->

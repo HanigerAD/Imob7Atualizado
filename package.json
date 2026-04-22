@@ -1,0 +1,24 @@
+{
+  "name": "imob7setembro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "build": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silvapereiraeduardo/imob7setembro.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/silvapereiraeduardo/imob7setembro/issues"
+  },
+  "homepage": "https://github.com/silvapereiraeduardo/imob7setembro#readme",
+  "devDependencies": {
+    "del": "^7.0.0",
+    "gulp": "^4.0.2"
+  }
+}

@@ -1,0 +1,28 @@
+version: '3'
+
+name: imob7
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    env_file:
+    - ./.env
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/home/app
+      - ./command.sh:/home/utils/command.sh
+  build-api:
+    build:
+      context: .
+      dockerfile: build.Dockerfile
+    env_file:
+    - ./.env
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/home/app
+      - ./build.command.sh:/home/utils/build.command.sh

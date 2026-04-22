@@ -1,0 +1,40 @@
+.first-header {
+    position: relative;
+    background: transparent;
+}
+
+.secondary-navbar {
+    background-image: url(src/assets/ponte-guaiba.jpg);
+}
+
+.secondary-logo {
+    filter: invert(100%);
+}
+
+.saturate { filter: saturate(3); }
+.grayscale { filter: grayscale(100%); }
+.contrast { filter: contrast(160%); }
+.brightness { filter: brightness(0.25); }
+.blur { filter: blur(3px); }
+.invert {  }
+.sepia {  }
+.huerotate { filter: hue-rotate(180deg); }
+.rss.opacity { filter: opacity(50%); }
+.navbar-transparent {
+    box-shadow: 0 2px 3pxhsla(0,0%,39%,.1);
+    background-color: #b2c1c185;
+}
+
+.navbar-brand .logo-sete {
+  max-width: 150px;
+}
+
+.navbar-brand .logo-sete {
+  max-width: 150px;
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .navbar-nav .nav-item a {
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,66 @@
+<header>
+    <div class="bg-theme-overlay" [style]="banner">
+        <section class="section__breadcrumb ">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <h2 class="text-capitalize text-white "> Financiamento </h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- END BREADCRUMB -->
+</header>
+<div class="clearfix"></div>
+
+<section class="home__about bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title__leading">
+                    <h2 class="text-capitalize"> Simule seu financiamento </h2>
+                    <p>
+                        Disponibilizamos abaixo, os sites de alguns bancos parceiros para que você faça uma simulação de
+                        financiamento.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="title__leading">
+                    <h2 class="text-capitalize"> Bancos parceiros </h2>
+
+                    <div class="row">
+                        <div class="col-md-2 zoom">
+                            <a (click)="redirectToPartner('https://www.bb.com.br/pbb/pagina-inicial/voce/produtos-e-servicos/financiamentos/bb-credito-imobiliario#/')">
+                                <img class="img-responsive" src="../../assets/images/bb-partner.png" height="100" width="100">
+                            </a>
+                        </div>
+                        <div class="col-md-2 zoom">
+                            <a (click)="redirectToPartner('https://banco.bradesco/html/classic/produtos-servicos/emprestimo-e-financiamento/encontre-seu-credito/simuladores-imoveis.shtm')">
+                                <img src="../../assets/images/bradesco-partner.png" height="100" width="100">
+                            </a>
+                        </div>
+                        <div class="col-md-2 zoom">
+                            <a (click)="redirectToPartner('https://www8.caixa.gov.br/siopiinternet-web/simulaOperacaoInternet.do?method=inicializarCasoUso')">
+                                <img src="../../assets/images/caixa-partner.png" height="100" width="100">
+                            </a>
+                        </div>
+                        <div class="col-md-2 zoom">
+                            <a (click)="redirectToPartner('https://www.itau.com.br/emprestimos-financiamentos/credito-imobiliario/simulador/')">
+                                <img src="../../assets/images/itau-partner.png" height="100" width="100">
+                            </a>
+                        </div>
+                        <div class="col-md-2 zoom">
+                            <a (click)="redirectToPartner('https://www.santander.com.br/atendimento-santander/')">
+                                <img src="../../assets/images/santander-partner.png" height="100" width="100">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,274 @@
+<header>
+  <div class="bg-theme-overlay fadein-page" [style]="banner">
+    <section class="section__breadcrumb ">
+      <div class="container">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-8 text-center">
+            <h2 class="text-capitalize text-white ">Imóveis</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- END BREADCRUMB -->
+</header>
+<div class="clearfix"></div>
+
+<!-- LISTING LIST -->
+<form [formGroup]="searchForm">
+  <section>
+    <div class="container fadein-page-slow">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="">
+            <!-- FORM FILTER -->
+            <div class="products__filter mb-30">
+              <div class="products__filter__group">
+                <div class="products__filter__header">
+                  <h5 class="text-center text-capitalize">Suas preferências</h5>
+                </div>
+                <div class="products__filter__body">
+
+                  <div class="form-group ml-2">
+                    <div class="form-check">
+                      <input formControlName="financeable" class="form-check-input bankable" type="checkbox" value=""
+                        id="defaultCheck1">
+                      <label class="form-check-label ml-1" for="defaultCheck1">
+                        Financiável
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <select class="wide select_option form-control" formControlName="zone">
+                      <option data-display="Property Status" value="0">Zona</option>
+                      <option *ngFor="let zone of zones" [value]="zone.code"> {{ zone.description }}</option>
+
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <select class="wide select_option form-control" formControlName="type">
+                      <option data-display="Property Status" value="0">Tipo</option>
+                      <option *ngFor="let type of types" [value]="type.code"> {{ type.description }}</option>
+
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <select class="wide select_option form-control" formControlName="finality">
+                      <option data-display="Property Type" value="0">Finalidade</option>
+                      <option *ngFor="let finality of finalities" [value]="finality.code"> {{ finality.description }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <select class="wide select_option form-control" formControlName="city"
+                      (change)="getNeighborhoods()">
+                      <option data-display="Area From" value="0"> Cidade </option>
+                      <option *ngFor="let city of cities" [value]="city.code"> {{ city.description }} </option>
+                    </select>
+                  </div>
+                  <div class="form-group" *ngIf="neighborhoods && neighborhoods.length > 0">
+                      <div class="checkbox" class="row-sm-6"  formArrayName="neighborhood">
+                        <div id="scrollable-checkbox-list">
+                          <div *ngFor="let item of getNeighborhoodControls(); let i = index" class="neighborhood-item">
+                            <input type="checkbox" [formControlName]="i">
+                            <span class="p-1">{{ neighborhoods[i].description }}</span>
+                          </div> 
+                        </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <select class="wide select_option form-control" formControlName="bedroom">
+                      <option data-display="Bedrooms" value="null">Dormitórios</option>
+                      <option [value]="1">1</option>
+                      <option [value]="2">2</option>
+                      <option [value]="3">3</option>
+                      <option [value]="4">4</option>
+                      <option [value]="5">5</option>
+                      <option [value]="6">6</option>
+                      <option [value]="7">7</option>
+                      <option [value]="8">8</option>
+                      <option [value]="9">9</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <select class="wide select_option form-control" formControlName="bathroom">
+                      <option data-display="Bathrooms" value="null">Banheiros</option>
+                      <option [value]="1">1</option>
+                      <option [value]="2">2</option>
+                      <option [value]="3">3</option>
+                      <option [value]="4">4</option>
+                      <option [value]="5">5</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <select class="wide select_option form-control" formControlName="parkingVacancy">
+                      <option data-display="Bathrooms" value="null">Vagas</option>
+                      <option [value]="1">1</option>
+                      <option [value]="2">2</option>
+                      <option [value]="3">3</option>
+                      <option [value]="4">4</option>
+                      <option [value]="5">5</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" class="wide form-control mb-3" appAllowDecimalNumber formControlName="minPrice"
+                      (keyup)="transformCurrency('minPrice')" placeholder="Valor Min." />
+
+                    <input type="text" class="wide form-control" appAllowDecimalNumber formControlName="maxPrice"
+                      (keyup)="transformCurrency('maxPrice')" placeholder="Valor Máx." />
+                  </div>
+
+                </div>
+                <div class="products__filter__footer">
+                  <div class="form-group mb-0">
+                    <button (click)="searchProperties()" class="btn btn-primary text-capitalize btn-block">
+                      <i class="fa fa-search ml-1"></i>
+                      Pesquisar imóveis
+
+                    </button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="tabs__custom-v2">
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade " id="pills-tab-one" role="tabpanel" aria-labelledby="pills-tab-one">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="card__image card__box-v1">
+                          <div class="row no-gutters">
+                            <div class="col-md-4 col-lg-3 col-xl-4" *ngFor="let property of properties">
+                              <div class="card__image__header h-250">
+                                <a href="#">
+                                  <!--                                                                <div class="ribbon text-capitalize">solda out</div>-->
+                                  <img [src]="getPropertyImage(property.photo)" class="img-fluid w100 img-transition">
+                                  <div class="info"> {{ property.transaction }}</div>
+                                </a>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="tab-pane fade show active" id="pills-tab-two" role="tabpanel"
+                    aria-labelledby="pills-tab-two">
+
+                    <div *ngIf="loading; else propertiesDone">
+                      <i class="fa fa-spinner fa-spin loading-icon"></i>
+                    </div>
+
+                    <ng-template #propertiesDone>
+
+                      <div class="row" *ngIf="properties.length; else noPropertiesMessage">
+                        <a class="col-md-6 col-lg-6"
+   *ngFor="let property of properties"
+   href="#/detalhes-imovel/{{ property.code }}"
+   target="_blank">
+
+                          <div class="card__image card__box-v1">
+                            <div class="card__image-header h-250 img-space">
+                              <!--                                                    <div class="ribbon text-capitalize">sold out</div>-->
+                              <div class="image-watermark">
+                                <img [src]="getPropertyImage(property.photo)" alt=""
+                                  class="img-fluid w100 img-transition">
+                              </div>
+                              <div class="custom-card-info">
+                                <div class="custom-card-info-item custom-card-info-item-bankable"
+                                  *ngIf="property.financeable"> Financiável </div>
+                                <div class="custom-card-info-item"> {{ property.transaction }} </div>
+                              </div>
+                            </div>
+                            <div class="card__image-body">
+                              <span class="badge badge-primary text-capitalize mb-2"> {{ property.category }} </span>
+                              <h6 class="text-capitalize">
+                                Código {{ property.internalCode }} - {{ property.title }}
+                              </h6>
+
+                              <p class="text-capitalize">
+                                <i class="fa fa-map-marker"></i>
+                                {{ property.neighborhood }}, {{ property.city }}
+                              </p>
+                              <ul class="list-inline card__content">
+                                <li class="list-inline-item" *ngIf="property.bedroom">
+                                  <span>
+                                    Dormitórios <br>
+                                    <i class="fa fa-bed"></i> {{ property.bedroom }}
+                                  </span>
+                                </li>
+                                <li class="list-inline-item" *ngIf="property.totalArea">
+                                  <span>
+                                    Área <br>
+                                    <i class="fa fa-map"></i> {{ property.totalArea }}m²
+                                  </span>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="card__image-footer">
+                              <ul class="list-inline my-auto ml-auto">
+                                <li class="list-inline-item">
+                                  <h6 class="text-primary">
+                                    {{ property.price && property.price !== "0.00" ? 'R$' +
+                                    converterParaMoeda(property.price, false) : 'A CONSULTAR' }}
+                                  </h6>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+
+                      <ng-template class="row" #noPropertiesMessage>
+                        <div class="col-md-12">
+                          <h6 class="no-properties-message"> Nenhum imóvel encontrado para os parâmetros procurados.
+                          </h6>
+                        </div>
+                      </ng-template>
+
+                      <app-pagination *ngIf="properties.length" class="pager" [registerPerPage]="perPage"
+                        [actualPage]="actualPage" [totalRegisters]="propertiesCounter"
+                        (pageChanged)="changePage($event)">
+                      </app-pagination>
+                    </ng-template>
+
+                    <div class="cleafix"></div>
+                  </div>
+                </div>
+                <!-- END FILTER VERTICAL -->
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END LISTING LIST -->
+
+  <!-- CALL TO ACTION -->
+  <section class="cta-v1 py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-9">
+          <h2 class="text-uppercase text-white"> Procurando um imóvel para compra ou venda? </h2>
+          <p class="text-capitalize text-white"> Fale agora com um de nossos corretores. </p>
+
+        </div>
+        <div class="col-lg-3">
+          <a [routerLink]="['/contatos']" class="btn btn-light text-uppercase "> Contatos
+            <i class="fa fa-angle-right ml-3 arrow-btn "></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
+<!-- END CALL TO ACTION -->

@@ -1,0 +1,133 @@
+<header>
+  <div class="bg-theme-overlay fadein-page" [style]="banner">
+    <section class="section__breadcrumb ">
+      <div class="container">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-8 text-center">
+            <h2 class="text-capitalize text-white">Contatos</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- END BREADCRUMB -->
+</header>
+<div class="clearfix"></div>
+
+<!-- Form contact -->
+<form [formGroup]="form">
+  <section class="wrap__contact-form fadein-page-slow">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <h5>Contatos</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group form-group-name">
+                <label>Nome <span class="required"></span></label>
+                <input type="text" class="form-control" formControlName="fullname" name="name" required="">
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group form-group-name">
+                <label>E-mail <span class="required"></span></label>
+                <input type="email" class="form-control" formControlName="email" name="email" required="">
+
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group form-group-name">
+                <label>Telefone <span class="required"></span></label>
+                <input type="text" class="form-control" formControlName="phone" name="phone"
+                  [mask]="'(00) 0 0000-0000'">
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group form-group-name">
+                <label>Assunto <span class="required"></span></label>
+                <input type="text" class="form-control" name="subject" formControlName="subject" required="">
+
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Mensagem </label>
+                <textarea class="form-control" formControlName="message" rows="9" name="message"></textarea>
+              </div>
+              <div class="form-group float-right mb-0">
+                <button type="submit" class="btn btn-primary btn-contact" (click)="sendMessage()">Enviar
+                  mensagem</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-4">
+          <div class="wrap__contact-open-hours">
+            <h5 class="text-capitalize">Horários de funcionamento</h5>
+            <ul class="list-unstyled">
+              <li class="d-flex align-items-center justify-content-between"><span>Segunda-feira - Sexta-feira</span>
+                <span> 09:00 às 12:00 - 13:30 às 18:00 </span>
+              </li>
+            </ul>
+          </div>
+          <h5>Localização</h5>
+          <div class="wrap__contact-form-office">
+            <ul class="list-unstyled">
+              <li>
+                <span>
+                  <i class="fa fa-home"></i>
+                </span>
+                R. Dr. Lauro Azambuja, 288 - Centro, Guaíba - RS
+              </li>
+              <li>
+                <span>
+                  <i class="fa fa-phone"></i>
+                  <a href="tel:"> (51) 3480-4066 </a>
+                </span>
+
+              </li>
+              <li>
+                <span>
+                  <i class="fa fa-envelope"></i>
+                  <a href="mailto:"> atendimento@imobiliaria7setembro.com.br </a>
+                </span>
+
+              </li>
+            </ul>
+
+            <div class="social__media">
+              <h5>Redes Sociais</h5>
+              <ul class="list-inline">
+
+                <li class="list-inline-item cursor-pointer">
+                  <a (click)="redirectToSocialMedia('https://www.facebook.com/Imobiliaria7Setembro/')"
+                    class="btn btn-social rounded text-white facebook">
+                    <i class="fa fa-facebook"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item cursor-pointer">
+                  <a (click)="redirectToSocialMedia('https://www.instagram.com/imob7setembro/')"
+                    class="btn btn-social rounded text-white instagram">
+                    <i class="fa fa-instagram"></i>
+                  </a>
+                </li>
+                <li class="list-inline-item cursor-pointer">
+                  <a (click)="redirectToSocialMedia('https://wa.me/5534804066')"
+                    class="btn btn-social rounded text-white whatsapp">
+                    <i class="fa fa-whatsapp"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
+<!-- End Form contact  -->

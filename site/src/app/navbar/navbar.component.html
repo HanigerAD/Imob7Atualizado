@@ -1,0 +1,154 @@
+<header class="jumbotron first-header" *ngIf="homepageOn; else secondaryNavbar">
+    <navbar-slider [images]="banners"></navbar-slider>
+
+    <div class="bg-overlay"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-hover navbar-expand-lg navbar-soft navbar-transparent fadein-page">
+        <div class="container">
+            <a class="navbar-brand">
+                <img class="logo-sete" [src]="siteLogo" alt="" (click)="redirectToHome()">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav99"
+                (click)="collapseNavbar()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="main_nav99" [ngbCollapse]="!navbarIsCollapsed">
+                <ul class="navbar-nav mx-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="dropdown" (click)="redirectToAboutUs()"> Sobre nós </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+                            (click)="redirectToProperties()"> Imóveis </a>
+                        <ul class="dropdown-menu animate fade-up">
+                            <li><a class="dropdown-item" (click)="redirectToBuy()"> Comprar </a>
+                            <li><a class="dropdown-item" (click)="redirectToRent()"> Alugar </a>
+                            <li><a class="dropdown-item" (click)="redirectToCountry()"> Rural </a>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link active" data-toggle="dropdown" (click)="redirectToEnterprise()"> Empreendimentos </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" (click)="redirectToServices()">
+                            Serviços </a>
+                        <ul class="dropdown-menu animate fade-up">
+                            <li><a class="dropdown-item" (click)="redirectToPartners()"> Simular financiamento </a>
+                            <li><a class="dropdown-item" (click)="redirectToSellYourProperty()"> Comercialize seu imóvel
+                                </a>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="dropdown" (click)="redirectToNews()"> Notícias </a>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" (click)="redirectToContacts()"> Contatos </a></li>
+
+                    <li class="nav-item">
+                        <a href="https://clienteonlinelocacao.samisistemas.com.br/login.php?Sigla=dmi" target="_blank"
+                            class="btn btn-primary btn-sm mt-4"><strong>2° VIA</strong><br>BOLETOS LOCAÇÃO</a>
+                    </li>
+                </ul>
+
+
+                <!-- Search content bar.// -->
+                <div class="top-search navigation-shadow">
+                    <div class="container">
+                        <div class="input-group ">
+                            <form action="#">
+
+                                <div class="row no-gutters mt-3">
+                                    <div class="col">
+                                        <input class="form-control border-secondary border-right-0 rounded-0"
+                                            type="search" value="" placeholder="Search " id="example-search-input4">
+                                    </div>
+                                    <div class="col-auto">
+                                        <a class="btn btn-outline-secondary border-left-0 rounded-0 rounded-right"
+                                            href="/search-result.html">
+                                            <i class="fa fa-search"></i>
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Search content bar.// -->
+            </div> <!-- navbar-collapse.// -->
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+
+    <app-search [siteInfo]="siteInfo"></app-search>
+
+    <!-- SCROLL TO TOP -->
+    <a class="return-to-top" id="return-to-top" (click)="scrollToTop()"><i class="fa fa-chevron-up"></i></a>
+    <!-- END SCROLL TO TOP -->
+    <script type="text/javascript" src="./js/index.bundle.js"></script>
+</header>
+
+<ng-template #secondaryNavbar>
+    <nav class="navbar navbar-hover navbar-expand-lg navbar-soft">
+        <div class="container">
+            <a class="navbar-brand">
+                <img src="./assets/logos/color-logo-name.png" alt="" class="logo-sete img-fluid"
+                    (click)="redirectToHome()">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav99"
+                (click)="collapseNavbar()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" [ngbCollapse]="!navbarIsCollapsed">
+                <ul class="navbar-nav mx-auto ">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active" data-toggle="dropdown" (click)="redirectToAboutUs()"> Sobre nós </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" (click)="redirectToProperties()">
+                            Imóveis </a>
+                        <ul class="dropdown-menu animate fade-up">
+                            <li><a class="dropdown-item" (click)="redirectToBuy()"> Comprar </a>
+                            <li><a class="dropdown-item" (click)="redirectToRent()"> Alugar </a>
+                            <li><a class="dropdown-item" (click)="redirectToCountry()"> Rural </a>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link active" data-toggle="dropdown" (click)="redirectToEnterprise()"> Empreendimentos </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" (click)="redirectToServices()">
+                            Serviços </a>
+                        <ul class="dropdown-menu animate fade-up">
+                            <li><a class="dropdown-item" (click)="redirectToPartners()"> Simular financiamento </a>
+                            <li><a class="dropdown-item" (click)="redirectToSellYourProperty()"> Comercialize seu imóvel
+                                </a>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active" data-toggle="dropdown" (click)="redirectToNews()"> Notícias </a>
+                    </li>
+
+                    <li class="nav-item"><a class="nav-link" (click)="redirectToContacts()"> Contatos </a></li>
+
+                    <li class="nav-item">
+                        <a href="https://clienteonlinelocacao.samisistemas.com.br/login.php?Sigla=dmi" target="_blank"
+                            class="btn btn-primary btn-sm mt-4"><strong>2° VIA</strong><br>BOLETOS LOCAÇÃO</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- SCROLL TO TOP -->
+    <a class="return-to-top" id="return-to-top" (click)="scrollToTop()"><i class="fa fa-chevron-up"></i></a>
+    <!-- END SCROLL TO TOP -->
+    <script type="text/javascript" src="./js/index.bundle.js"></script>
+</ng-template>

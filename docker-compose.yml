@@ -1,0 +1,119 @@
+version: "3.6"
+name: imob7setembro
+
+services:
+  database:
+    container_name: imob7-database
+    build: ./database
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_DATABASE: imob7
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./database/init:/docker-entrypoint-initdb.d
+      - ./database/data:/var/lib/mysql
+    deploy:
+      resources:
+        limits:
+          cpus: '0.80'
+          memory: 640M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+
+  # admin-database:
+  #   container_name: imob7-admin-database
+  #   image: phpmyadmin/phpmyadmin
+  #   links:
+  #     - database
+  #   environment:
+  #     PMA_HOST: database
+  #     PMA_PORT: 3306
+  #     PMA_ARBITRARY: 1
+  #   restart: always
+  #   ports:
+  #     - 3307:80
+  #   volumes:
+  #     - imob7-data:/var/lib/pgadmin
+  #   depends_on:
+  #     - database
+  #   deploy:
+  #     resources:
+  #         limits:
+  #           cpus: "0.50"
+  #           memory: 640M
+
+  api:
+    container_name: imob7-api
+    extends:
+      file: ./api/docker-compose.yml
+      service: api
+    links:
+      - database
+    depends_on:
+      - database
+    deploy:
+      resources:
+        limits:
+          cpus: '0.80'
+          memory: 640M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+
+  admin:
+    container_name: imob7-admin
+    extends:
+      file: ./admin/docker-compose.yml
+      service: frontend
+    depends_on:
+      - api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.80'
+          memory: 640M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+
+  site:
+    container_name: imob7-site
+    extends:
+      file: ./site/docker-compose.yml
+      service: frontend
+    depends_on:
+      - api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.80'
+          memory: 1024M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+
+  build-api:
+    container_name: build-imob7-api
+    extends:
+      file: ./api/docker-compose.yml
+      service: build-api
+
+  build-admin:
+    container_name: build-imob7-admin
+    extends:
+      file: ./admin/docker-compose.yml
+      service: build-frontend
+
+  build-site:
+    container_name: build-imob7-site
+    extends:
+      file: ./site/docker-compose.yml
+      service: build-frontend
+
+volumes:
+  imob7-data:

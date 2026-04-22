@@ -1,0 +1,43 @@
+<nav class="mt-4">
+  <ul class="pagination justify-content-center">
+    <li class="page-item" [ngClass]="{'disabled': actualPage == 1}">
+      <a class="page-link pointer" (click)="changePage(actualPage - 1)">
+        <
+      </a>
+    </li>
+
+    <li class="page-item" *ngIf="pages.length >= 1" [ngClass]="{'active': actualPage == 1}">
+      <a class="page-link pointer" (click)="changePage(1)">{{ 1 }}</a>
+    </li>
+
+    <li class="page-item" *ngIf="actualPage > 3">
+      <span class="page-link">...</span>
+    </li>
+
+    <ng-container *ngFor="let page of pages">
+      <ng-container *ngIf="page >= 2 && page >= (actualPage - 1) && page <=(actualPage + 1) && page < pages.length; else ''">
+        <li class="page-item" [ngClass]="{'active': actualPage == page}">
+          <a class="page-link pointer" (click)="changePage(page)">{{ page }}</a>
+        </li>
+      </ng-container>
+    </ng-container>
+
+    <li class="page-item" *ngIf="pages.length > 3 && (actualPage != pages.length && actualPage != pages.length - 1 && actualPage != pages.length - 2)">
+      <span class="page-link">...</span>
+    </li>
+
+    <li class="page-item" *ngIf="pages.length >= 2" [ngClass]="{'active': actualPage == pages.length}">
+      <a class="page-link pointer" (click)="changePage(pages.length)">{{ pages.length }}</a>
+    </li>
+
+    <li class="page-item" [ngClass]="{'disabled': actualPage == numberOfPages}">
+      <a class="page-link pointer" (click)="changePage(actualPage + 1)">
+        >
+      </a>
+    </li>
+  </ul>
+
+  <p class="text-center">
+    <b>{{ totalRegisters }}</b> registros encontrados
+  </p>
+</nav>

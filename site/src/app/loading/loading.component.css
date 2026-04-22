@@ -1,0 +1,52 @@
+
+.grad-bgd {
+    height: 100%;
+    width: 100%;
+    background-color: blue; /* For browsers that do not support gradients */
+    background-image: linear-gradient(to bottom right, #336699, #33CCCC);
+}
+
+.centralize {
+    display: flex;
+    justify-content: center;
+}
+
+.pulse {
+    animation: pulse 3s infinite;
+    margin: 0 auto;
+    display: table;
+    margin-top: 50px;
+    animation-direction: alternate;
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scale(1);
+    }
+    50% {
+        -webkit-transform: scale(1.1);
+    }
+    100% {
+        -webkit-transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+html,
+body {
+    height: 100%;
+    background-color: #e74c3c;
+}

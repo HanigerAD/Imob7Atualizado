@@ -1,0 +1,15 @@
+
+.post-keys {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+}
+
+.post-key-label {
+    background-color: #002247;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: #FFFFFF;
+    font-size:14px;
+    font-family:"Open Sans",sans-serif;
+}

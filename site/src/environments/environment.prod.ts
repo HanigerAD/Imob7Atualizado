@@ -1,0 +1,22 @@
+export const environment = {
+  production: true,
+  endpoint: {
+    viaCep: "https://viacep.com.br",
+    user: "https://api.imobiliaria7setembro.com.br/user",
+    neighborhood: "https://api.imobiliaria7setembro.com.br/neighborhood",
+    city: "https://api.imobiliaria7setembro.com.br/locality/city",
+    uf: "https://api.imobiliaria7setembro.com.br/locality/uf",
+    agent: "https://api.imobiliaria7setembro.com.br/agent",
+    auth: "https://api.imobiliaria7setembro.com.br/auth",
+    blog: "https://api.imobiliaria7setembro.com.br/blog",
+    configuration: "https://api.imobiliaria7setembro.com.br/configuration",
+    banner: "https://api.imobiliaria7setembro.com.br/banner",
+    sobreNosBannerEndpoint: "https://api.imobiliaria7setembro.com.br/sobre-nos-banner",
+    locality: "https://api.imobiliaria7setembro.com.br/locality",
+    property: "https://api.imobiliaria7setembro.com.br/property",
+    contact: "https://api.imobiliaria7setembro.com.br/contact",
+    cdn: "https://cdn.imobiliaria7setembro.com.br/",
+    partner: "https://api.imobiliaria7setembro.com.br/partner",
+  },
+  cdn: "https://cdn.imobiliaria7setembro.com.br",
+};

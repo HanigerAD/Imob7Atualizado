@@ -1,0 +1,209 @@
+COLOCAR NO INDEX.HTML DA RAIZ EM CASO DE REBUILD, ADICIONADO SOMENTE NO ARQUIVO NO CPANEL, NECESSÁRIO ADICIONAR ESSE SCRIPT PARA AS ULTIMAS ATLERAÇÕES DE BOTÃO FLUTUANDO DO WHATSAPP E NUMERO NO HEADER
+
+<script>
+window.addEventListener("load", function() {
+  var btn = document.createElement("a");
+  btn.href = "https://wa.me/555134804066";
+  btn.target = "_blank";
+
+  btn.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 32 32" fill="white">
+      <path d="M16 .396C7.163.396 0 7.56 0 16.396c0 2.893.757 5.708 2.193 8.177L.07 31.93l7.53-2.08a15.93 15.93 0 008.4 2.45c8.837 0 16-7.164 16-16S24.837.396 16 .396zm0 29.265a13.16 13.16 0 01-6.68-1.82l-.48-.285-4.466 1.232 1.19-4.354-.313-.45a13.17 13.17 0 01-2.02-7.089c0-7.27 5.91-13.18 13.18-13.18s13.18 5.91 13.18 13.18-5.91 13.18-13.18 13.18zm7.24-9.86c-.397-.198-2.35-1.16-2.713-1.29-.363-.132-.627-.198-.89.198-.264.396-1.022 1.29-1.254 1.554-.23.264-.462.297-.858.1-.396-.198-1.672-.616-3.186-1.965-1.178-1.05-1.972-2.347-2.205-2.743-.23-.396-.025-.61.173-.808.18-.18.396-.462.594-.693.198-.23.264-.396.396-.66.132-.264.066-.495-.033-.693-.1-.198-.89-2.15-1.22-2.94-.322-.774-.65-.668-.89-.68-.23-.01-.495-.012-.758-.012-.264 0-.693.1-1.056.495-.363.396-1.386 1.355-1.386 3.3s1.42 3.823 1.617 4.087c.198.264 2.794 4.27 6.77 5.987.946.408 1.683.652 2.26.835.95.302 1.815.26 2.498.158.762-.114 2.35-.96 2.68-1.887.33-.927.33-1.722.23-1.887-.1-.165-.363-.264-.76-.462z"/>
+    </svg>
+  `;
+
+  // Estilo
+  btn.style.position = "fixed";
+  btn.style.bottom = "100px";
+  btn.style.right = "20px";
+  btn.style.background = "#25D366";
+  btn.style.width = "55px";
+  btn.style.height = "55px";
+  btn.style.borderRadius = "50%";
+  btn.style.display = "flex";
+  btn.style.alignItems = "center";
+  btn.style.justifyContent = "center";
+  btn.style.boxShadow = "0 6px 18px rgba(0,0,0,0.3)";
+  btn.style.zIndex = "9999";
+
+  // ANIMAÇÃO PULSANTE
+  btn.style.animation = "pulseWhats 2s infinite";
+
+  document.body.appendChild(btn);
+
+  // nimação via JS
+  var style = document.createElement("style");
+  style.innerHTML = `
+    @keyframes pulseWhats {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+      }
+      70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 5px rgba(37, 211, 102, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+      }
+    }
+  `;
+  document.head.appendChild(style);
+});
+</script>
+
+<style>
+.whats-header {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding-left: 20px;
+}
+
+.whats-header a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 16px;
+  white-space: nowrap;
+  font-family: 'Open Sans', sans-serif;
+}
+
+@media (max-width: 768px) {
+  .whats-header {
+    display: none !important;
+  }
+}
+
+.whats-header a {
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.navbar:not(.navbar-transparent) .whats-header a {
+  color: #222;
+}
+
+/* MOBILE WHATS */
+.whats-mobile {
+  display: none;
+}
+
+.whats-mobile a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* ÍCONE */
+.whats-mobile img {
+  width: 20px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .whats-mobile {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+  }
+
+  /* HEADER TRANSPARENTE (HOME) */
+  .navbar-transparent .whats-mobile a {
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+
+  /* EADER BRANCO (PÁGINAS INTERNAS) */
+  .navbar:not(.navbar-transparent) .whats-mobile a {
+    color: #222;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  }
+}
+
+/* ESCONDE DESKTOP NO MOBILE */
+@media (max-width: 768px) {
+  .whats-header {
+    display: none !important;
+  }
+}
+</style>
+<script>
+function iniciarScripts() {
+
+  function addWhatsHeader() {
+
+    var menu = document.querySelector(".navbar .navbar-collapse");
+
+    if (!menu) return;
+    if (menu.querySelector(".whats-header")) return;
+
+    var container = document.createElement("div");
+    container.className = "whats-header";
+
+    container.innerHTML = `
+      <a href="https://wa.me/555134804066" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="20">
+        <span>(51) 3480-4066</span>
+      </a>
+    `;
+
+    menu.appendChild(container);
+  }
+
+  function removerNoticias() {
+    var itens = document.querySelectorAll(".navbar a");
+
+    itens.forEach(function(el) {
+      if (el.innerText.includes("NOTÍCIAS")) {
+        el.closest("li")?.remove();
+      }
+    });
+  }
+
+  addWhatsHeader();
+  removerNoticias();
+}
+
+
+setInterval(iniciarScripts, 1000);
+</script>
+
+<script>
+function addWhatsMobile() {
+
+  // só roda no mobile
+  if (window.innerWidth > 768) return;
+
+  var navbar = document.querySelector(".navbar .container");
+
+  if (!navbar) return;
+  if (navbar.querySelector(".whats-mobile")) return;
+
+  var container = document.createElement("div");
+  container.className = "whats-mobile";
+
+  container.innerHTML = `
+    <a href="https://wa.me/555134804066" target="_blank">
+      <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png">
+      <span>(51) 3480-4066</span>
+    </a>
+  `;
+
+  var toggler = document.querySelector(".navbar-toggler");
+
+  if (toggler) {
+    toggler.parentElement.insertBefore(container, toggler);
+  }
+}
+
+// roda sempre (funciona com Angular)
+setInterval(addWhatsMobile, 1000);
+</script>

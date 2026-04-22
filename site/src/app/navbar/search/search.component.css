@@ -1,0 +1,123 @@
+.find-your-prop {
+  text-transform: inherit !important;
+}
+
+.search__container {
+  display: flex;
+  justify-content: center;
+}
+
+.search-box {
+  background-color: #FFFFFF !important;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  margin-top: 20%;
+  opacity: 0.84;
+}
+
+.search-font {
+  padding: 2rem 0.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+}
+
+.slider-and-search {
+  margin-top: 30px;
+}
+
+/* Chip field container */
+.chip-field-container {
+  width: 100%;
+}
+
+/* Style for the chip field to match other form fields */
+.chip-field {
+  min-height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.25rem 0.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Remove default Material styling from chip list */
+.chip-field .mat-chip-list-wrapper {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Style for the chips */
+.chip-field .mat-chip {
+  font-size: 14px;
+  height: 24px;
+  margin: 2px 4px 2px 0;
+  background-color: #e9ecef;
+  color: #495057;
+  border-radius: 4px;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+.chip-field .mat-icon {
+  font-size: 16px;
+  margin-left: 4px;
+  align-self: center;
+}
+
+/* Style for the close icon */
+.chip-field .mat-chip .mat-icon {
+  font-size: 16px;
+  height: 16px;
+  width: 16px;
+  line-height: 16px;
+  margin-left: 4px;
+}
+
+/* Style for the input inside chip field */
+.chip-field input {
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  height: 24px;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  flex: 1;
+}
+
+/* Style for the autocomplete panel */
+.mat-autocomplete-panel {
+  border-radius: 4px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.mat-option {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+#cancel-icon {
+  line-height: 18px;
+}
+
+#neighborhoodInput {
+  min-height: 60px;
+  height: auto;
+
+}

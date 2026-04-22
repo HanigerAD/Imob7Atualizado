@@ -1,0 +1,122 @@
+<form [formGroup]="searchForm" class="fadein-page-slow">
+
+  <div class="wrap__intro d-flex align-items-md-center  ">
+    <div class="container">
+      <div class="row align-items-center justify-content-center flex-wrap">
+        <div class="col-lg-12 mx-auto">
+          <div class="wrap__intro-heading">
+
+            <h1 class="find-your-prop text-center">
+              Encontre o imóvel dos seus sonhos
+            </h1>
+            <p class="text-center"> {{ siteInfo?.configuration?.institutionalTextResume }} </p>
+
+            <div class="bg__overlay-black p-4">
+              <div class="search__property">
+                <div class="position-relative">
+                  <ul class="nav nav-tabs nav-tabs-02 mb-4 justify-content-center" id="pills-tab" role="tablist">
+                    <li class="nav-item mr-1">
+                      <a class="nav-link" id="urban-tab" data-toggle="pill" role="tab" aria-controls="buy"
+                        aria-selected="true" [ngClass]="{'active': activatedTab == 'URBAN'}"
+                        (click)="changeTab('URBAN')">Zona urbana </a>
+                    </li>
+                    <li class="nav-item mr-1">
+                      <a class="nav-link" id="rural-tab" data-toggle="pill" role="tab" aria-controls="rent"
+                        aria-selected="false" [ngClass]="{'active': activatedTab == 'RURAL'}"
+                        (click)="changeTab('RURAL')"> Zona rural </a>
+                    </li>
+                    <li class="nav-item mr-1">
+                      <a class="nav-link" id="code-tab" data-toggle="pill" role="tab" aria-controls="rent"
+                        aria-selected="false" [ngClass]="{'active': activatedTab == 'CODE'}"
+                        (click)="changeTab('CODE')"> Código </a>
+                    </li>
+
+                  </ul>
+                  <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade active show" id="buy" role="tabpanel" aria-labelledby="buy-tab">
+                      <div class="search__container">
+                        <div class="row input-group">
+                          <div class="col-lg-4 mb-3" *ngIf="activatedTab == 'URBAN'">
+                            <select class="select_option form-control" name="select" formControlName="finality">
+                              <option value="0">Finalidade</option>
+                              <option *ngFor="let finality of finalities" [value]="finality.code">
+                                {{ finality.description }}
+                              </option>
+                            </select>
+                          </div>
+
+                          <div class="col-lg-4 mb-3" *ngIf="activatedTab == 'URBAN'">
+                            <select class="select_option form-control" name="select" formControlName="type">
+                              <option value="0"> Tipo </option>
+                              <option *ngFor="let type of types" [value]="type.code"> {{ type.description }} </option>
+                            </select>
+                          </div>
+
+                          <div class="col-lg-4 mb-3" *ngIf="activatedTab == 'URBAN' || activatedTab == 'RURAL'">
+                            <select class="select_option form-control" name="select" (change)="getNeighborhoods()"
+                              formControlName="city">
+                              <option value="0"> Cidade </option>
+                              <option *ngFor="let city of cities" [value]="city.code">
+                                {{ city.description }}
+                              </option>
+                            </select>
+                          </div>
+
+                          <div class="col-lg-12 mb-3" *ngIf="activatedTab == 'URBAN'">
+                            <div class="chip-field-container"
+                              *ngIf="searchForm.get('city').value && filteredNeighborhoods.length > 0">
+                              <div id="neighborhoodInput" class="chip-field select_option form-control">
+                                <mat-chip-list #chipList>
+                                  <mat-chip *ngFor="let neighborhood of selectedNeighborhoods" [removable]="true"
+                                    (removed)="removeNeighborhood(neighborhood)">
+                                    {{neighborhood.description}}
+                                    <span matChipRemove class="material-icons" id="cancel-icon">cancel</span>
+                                  </mat-chip>
+                                  <input #neighborhoodInput [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                    [placeholder]="selectedNeighborhoods.length ? '' : 'Clique para selecionar os bairros (em branco para todos)'">
+                                </mat-chip-list>
+                              </div>
+                              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectNeighborhood($event)">
+                                <mat-option *ngFor="let neighborhood of filteredNeighborhoods" [value]="neighborhood">
+                                  {{neighborhood.description}}
+                                </mat-option>
+                              </mat-autocomplete>
+                            </div>
+                          </div>
+
+                          <div class="col-lg-4 mb-3" *ngIf="activatedTab == 'CODE'">
+                            <input type="number" class="form-control" formControlName="internalCode" min="1  "
+                              placeholder="Código">
+                          </div>
+
+                          <div class="col-lg-4 mb-3" *ngIf="activatedTab == 'URBAN' || activatedTab == 'RURAL'">
+                            <input type="text" class="form-control" appAllowDecimalNumber formControlName="minPrice"
+                              (keyup)="transformCurrency('minPrice')" placeholder="Valor Min." />
+                          </div>
+
+                          <div class="col-lg-4 mb-3" *ngIf="activatedTab == 'URBAN' || activatedTab == 'RURAL'">
+                            <input type="text" class="form-control" appAllowDecimalNumber formControlName="maxPrice"
+                              (keyup)="transformCurrency('maxPrice')" placeholder="Valor Máx." />
+                          </div>
+
+                          <div class="col-lg-4 mb-3">
+                            <button class="btn btn-primary btn-block h-100" type="submit" (click)="search()">
+                              <i class="fa fa-search"></i> <span class="ml-1 text-uppercase">Buscar</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</form>

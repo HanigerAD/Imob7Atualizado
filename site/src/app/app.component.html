@@ -1,0 +1,13 @@
+
+<div *ngIf="!loading; else lazyLoading" class="app"> 
+    <app-navbar [siteInfo]="siteInfo" [siteLogo]="siteLogo"></app-navbar>
+
+    <router-outlet></router-outlet>
+
+    <app-footer [siteInfo]="siteInfo" [siteLogo]="siteLogo"></app-footer>
+</div>
+
+<ng-template #lazyLoading>
+    <app-loading></app-loading>
+</ng-template>
+

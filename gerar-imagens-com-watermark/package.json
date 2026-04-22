@@ -1,0 +1,19 @@
+{
+  "name": "gerar-imagens-com-watermark",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "ftp": "^0.3.10",
+    "jimp": "^0.16.2",
+    "knex": "^2.3.0",
+    "mysql": "^2.18.1"
+  }
+}
