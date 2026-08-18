@@ -20,4 +20,5 @@ export class PropertyFilterEntity {
     public vaga?: number;
     public dormitorio?: number;
     public agenciador?: number;
+    public tipo_excluido?: number;
 }

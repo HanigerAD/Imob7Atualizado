@@ -16,6 +16,11 @@ export class PropertyFilterMapper {
       .zona(request?.zone)
       .municipio(request?.city)
       .tipo(request?.type)
+      .tipo_excluido(
+        request?.excludeType !== undefined
+          ? Number(request.excludeType)
+          : undefined
+      )
       .paginacao(this.generatePaginationFilter(request))
       .preco(this.generatePriceFilter(request))
       .financiavel(request?.financeable)

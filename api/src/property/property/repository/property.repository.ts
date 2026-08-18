@@ -159,6 +159,11 @@ export class PropertyRepository {
           break;
         }
 
+        case 'tipo_excluido': {
+          queryBuilder.where('imovel.tipo', '<>', filterValue);
+          break;
+        }
+
         default: {
           queryBuilder.where(`imovel.${filterKey}`, '=', filterValue);
           break;
@@ -508,27 +513,27 @@ export class PropertyRepository {
   }
 
   public async getAllForXml(): Promise<any[]> {
-  return this.knex
-    .select(
-      'imovel.*',
-      'area_total as areaTotal',
-      'transacao_imovel.descricao as transacao',
-      'categoria_imovel.descricao as categoria',
-      'zona_imovel.descricao as zona',
-      'unidade_federativa.descricao as uf',
-      'municipio.descricao as municipio',
-      'bairro.descricao as bairro',
-      'tipo_imovel.descricao as tipo_descricao'
-    )
-    .from('imovel')
-    .leftJoin('categoria_imovel', 'categoria_imovel.codigo', 'imovel.categoria')
-    .leftJoin('zona_imovel', 'zona_imovel.codigo', 'imovel.zona')
-    .leftJoin('bairro', 'bairro.codigo', 'imovel.bairro')
-    .leftJoin('municipio', 'municipio.codigo', 'bairro.municipio')
-    .leftJoin('unidade_federativa', 'unidade_federativa.codigo', 'municipio.unidade_federativa')
-    .leftJoin('transacao_imovel', 'transacao_imovel.codigo', 'imovel.transacao')
-    .leftJoin('tipo_imovel', 'tipo_imovel.codigo', 'imovel.tipo')
-    .orderBy('imovel.codigo', 'DESC');
-}
+    return this.knex
+      .select(
+        'imovel.*',
+        'area_total as areaTotal',
+        'transacao_imovel.descricao as transacao',
+        'categoria_imovel.descricao as categoria',
+        'zona_imovel.descricao as zona',
+        'unidade_federativa.descricao as uf',
+        'municipio.descricao as municipio',
+        'bairro.descricao as bairro',
+        'tipo_imovel.descricao as tipo_descricao'
+      )
+      .from('imovel')
+      .leftJoin('categoria_imovel', 'categoria_imovel.codigo', 'imovel.categoria')
+      .leftJoin('zona_imovel', 'zona_imovel.codigo', 'imovel.zona')
+      .leftJoin('bairro', 'bairro.codigo', 'imovel.bairro')
+      .leftJoin('municipio', 'municipio.codigo', 'bairro.municipio')
+      .leftJoin('unidade_federativa', 'unidade_federativa.codigo', 'municipio.unidade_federativa')
+      .leftJoin('transacao_imovel', 'transacao_imovel.codigo', 'imovel.transacao')
+      .leftJoin('tipo_imovel', 'tipo_imovel.codigo', 'imovel.tipo')
+      .orderBy('imovel.codigo', 'DESC');
+  }
 
 }

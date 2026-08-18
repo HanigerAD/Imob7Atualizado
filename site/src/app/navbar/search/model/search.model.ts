@@ -11,6 +11,7 @@ export class SearchModel {
     public zone: number | string;
     public showSite: number | string;
     public type: PropertyTypeEnum | string;
+    public excludeType?: number | string;
     public page: number | string;
     public perPage: number | string;
     public bedroom?: number | string;

@@ -1,17 +1,17 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import {HomepageService} from '../../shared/services/homepage.service';
-import {Options} from '@angular-slider/ngx-slider';
-import {LoginModel} from '../../shared/model/login.model';
-import {PropertyService} from '../../property/services/property.service';
-import {FeaturedPropertiesMapper} from './mapper/featured-properties.mapper';
-import {PropertyModel} from '../../property/models/property.model';
-import {PostModel} from '../model/post.model';
-import {Router} from '@angular/router';
+import { HomepageService } from '../../shared/services/homepage.service';
+import { Options } from '@angular-slider/ngx-slider';
+import { LoginModel } from '../../shared/model/login.model';
+import { PropertyService } from '../../property/services/property.service';
+import { FeaturedPropertiesMapper } from './mapper/featured-properties.mapper';
+import { PropertyModel } from '../../property/models/property.model';
+import { PostModel } from '../model/post.model';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
-import {NewsService} from '../../news/service/news.service';
-import {ConfigurationModel} from '../../shared/model/configuration.model';
-import {StorageEnum} from '../../shared/storage.enum';
+import { NewsService } from '../../news/service/news.service';
+import { ConfigurationModel } from '../../shared/model/configuration.model';
+import { StorageEnum } from '../../shared/storage.enum';
 import { converterParaMoeda } from '../../shared/utils/parser.utils';
 import { TransactionEnum } from 'src/app/shared/enum/transaction.enum';
 
@@ -29,19 +29,21 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   public featuredPropertiesToRent: PropertyModel[] = [];
   public featuredPropertiesToSell: PropertyModel[] = [];
+  public featuredEnterprises: PropertyModel[] = [];
   public posts: PostModel[] = [];
 
   public converterParaMoeda = converterParaMoeda;
 
   constructor(
-      private service: HomepageService,
-      private propertyService: PropertyService,
-      private newsService: NewsService,
-      private router: Router
+    private service: HomepageService,
+    private propertyService: PropertyService,
+    private newsService: NewsService,
+    private router: Router
   ) { }
 
   public ngOnInit(): void {
     this.getFeaturedProperties();
+    this.getFeaturedEnterprises();
     this.getBlogPosts();
     this.getConfiguration();
   }
@@ -60,27 +62,39 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   private getFeaturedProperties(): void {
     this.subscriptions.add(
-        this.propertyService.getProperties(FeaturedPropertiesMapper.mapFilterFeaturedProperties(2)).subscribe(
-            properties => {
-              this.featuredPropertiesToRent = properties.filter(property => property.transaction == 'Aluguel');
-            }
-        )
+      this.propertyService.getProperties(FeaturedPropertiesMapper.mapFilterFeaturedProperties(2)).subscribe(
+        properties => {
+          this.featuredPropertiesToRent = properties.filter(property => property.transaction == 'Aluguel');
+        }
+      )
     );
 
     this.subscriptions.add(
       this.propertyService.getProperties(FeaturedPropertiesMapper.mapFilterFeaturedProperties(1)).subscribe(
-          properties => {
-            this.featuredPropertiesToSell = properties.filter(property => property.transaction == 'Venda');
-          }
+        properties => {
+          this.featuredPropertiesToSell = properties.filter(property => property.transaction == 'Venda');
+        }
       )
-  );
+    );
+  }
+
+  private getFeaturedEnterprises(): void {
+    this.subscriptions.add(
+      this.propertyService
+        .getProperties(FeaturedPropertiesMapper.mapFilterFeaturedEnterprises())
+        .subscribe(
+          properties => {
+            this.featuredEnterprises = properties;
+          }
+        )
+    );
   }
 
   private getBlogPosts(): void {
     this.subscriptions.add(
-        this.service.getPosts().subscribe(
-            posts => this.posts = posts.slice(0, 2)
-        )
+      this.service.getPosts().subscribe(
+        posts => this.posts = posts.slice(0, 2)
+      )
     );
   }
 

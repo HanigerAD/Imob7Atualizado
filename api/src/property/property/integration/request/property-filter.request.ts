@@ -18,4 +18,5 @@ export class PropertyFilterRequest {
     public parkingVacancy?: number;
     public bathroom?: number;
     public featured?: boolean | string | number;
+    public excludeType?: number;
 }
