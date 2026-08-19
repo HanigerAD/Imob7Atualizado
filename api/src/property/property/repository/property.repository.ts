@@ -14,6 +14,7 @@ import { PropertyEntity } from '../entity/property.entity';
 import { AgentEntity } from './../../../agent/entity/agent.entity';
 import { PropertyFilterEntity } from './../entity/property-filter.entity';
 import { ImageSortRequest } from "../integration/request/image-sort.request";
+import { FeaturedSortRequest } from "../integration/request/featured-sort.request";
 import { PropertyDocumentEntity } from "../entity/property-document.entity";
 import { LogEntity } from "../entity/log.entity";
 import { SituationEntity } from "../../../user/entity/situation.entity";
@@ -202,7 +203,15 @@ export class PropertyRepository {
       .modify(queryBuilder => this.getAllQueryBuilder(queryBuilder, filters))
       .offset(since)
       .limit(perPage)
-      .orderBy('imovel.codigo', 'DESC');
+      .modify(queryBuilder => {
+        if (Number(filters.destaque) === 1) {
+          queryBuilder.orderByRaw(
+            'imovel.ordem_destaque IS NULL ASC, imovel.ordem_destaque ASC, imovel.codigo DESC'
+          );
+        } else {
+          queryBuilder.orderBy('imovel.codigo', 'DESC');
+        }
+      });
   }
 
   public async getAllCounter(filters: PropertyFilterEntity): Promise<number> {
@@ -472,6 +481,13 @@ export class PropertyRepository {
       .update('ordem', imageSort.index)
       .from('foto_imovel')
       .where('foto', imageSort.path);
+  }
+
+  public updateFeaturedSort(featuredSort: FeaturedSortRequest): Promise<number> {
+    return this.knex
+      .update('ordem_destaque', featuredSort.index)
+      .from('imovel')
+      .where('codigo', featuredSort.code);
   }
 
   public insertLog(logEntity: LogEntity): Promise<number> {

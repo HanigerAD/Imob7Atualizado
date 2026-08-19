@@ -5271,6 +5271,7 @@ CREATE TABLE `imovel` (
   `hectare` int(6) DEFAULT NULL,
   `ano_construcao` int(12) DEFAULT NULL,
   `destaque` tinyint(1) DEFAULT '0',
+  `ordem_destaque` int(11) DEFAULT NULL,
   `super_destaque` tinyint(1) DEFAULT '0',
   `suite` int(6) DEFAULT NULL,
   `alugado` tinyint(1) DEFAULT '0',

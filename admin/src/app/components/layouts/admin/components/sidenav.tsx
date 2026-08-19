@@ -59,6 +59,7 @@ export const Sidenav = () => {
             <RenderLink to="/admin/corretores" label="Corretores" />
             <RenderLink to="/admin/parceiros" label="Parceiros" />
             <RenderLink to="/admin/imoveis" label="Imóveis" />
+            <RenderLink to="/admin/destaques-home" label="Destaques da Home" />
             <RenderLink to="/admin/categorias" label="Categorias" />
             <RenderDropdown label="Localizacões">
               <RenderLink to="/admin/cidades" label="Cidades" />

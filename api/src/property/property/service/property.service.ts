@@ -39,6 +39,7 @@ import { TypeMapper } from './../../type/mapper/type.mapper';
 import { ImageMapper } from './../mapper/image.mapper';
 import { CdnService } from "../../../common/service/cdn.service";
 import { ImageSortRequest } from "../integration/request/image-sort.request";
+import { FeaturedSortRequest } from "../integration/request/featured-sort.request";
 import { PropertyDocumentResponse } from "../integration/response/property-document.response";
 import { PropertyDocumentMapper } from "../mapper/property-document.mapper";
 import { LogEntity } from "../entity/log.entity";
@@ -80,7 +81,7 @@ export class PropertyService {
   ) {
   }
 
-   private clean(value: any): string {
+  private clean(value: any): string {
     if (!value) return '';
     return String(value)
       .replace(/[\x00-\x1F\x7F]/g, '')   // remove caracteres ilegais (CTRL chars)
@@ -308,6 +309,14 @@ export class PropertyService {
     await Promise.all(imagesSort.map(image => this.repository.updateImagesSort(image)));
   }
 
+  public async updateFeaturedSort(
+    featuredSort: FeaturedSortRequest[]
+  ): Promise<void> {
+    await Promise.all(
+      featuredSort.map(item => this.repository.updateFeaturedSort(item))
+    );
+  }
+
   public async insertPropertyDocument(file: Express.Multer.File, propertyCode: number): Promise<void> {
     const newFile = this.buildPropertyDocument(file);
     await this.documentService.saveDocument(newFile);
@@ -375,16 +384,16 @@ export class PropertyService {
   }
 
   public async getFeedXml(): Promise<string> {
-  // AGORA SIM: SELECT ESPECIAL PARA O XML
-  const properties = await this.repository.getAllForXml();
+    // AGORA SIM: SELECT ESPECIAL PARA O XML
+    const properties = await this.repository.getAllForXml();
 
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<Document>\n<imoveis>\n`;
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n<Document>\n<imoveis>\n`;
 
-  for (const p of properties) {
-    const images = await this.getPropertyImagesUrls(p.codigo);
-    const lastUpdate = p.data_atualizacao ? new Date(p.data_atualizacao) : new Date();
+    for (const p of properties) {
+      const images = await this.getPropertyImagesUrls(p.codigo);
+      const lastUpdate = p.data_atualizacao ? new Date(p.data_atualizacao) : new Date();
 
-    xml += `<imovel>
+      xml += `<imovel>
 <referencia>${this.clean(p.codigo_interno ?? p.codigo)}</referencia>
 <codigo_cliente>${this.clean(p.codigo_interno ?? p.codigo)}</codigo_cliente>
 <link_cliente>https://www.imobiliaria7setembro.com.br/#/detalhes-imovel/${p.codigo}</link_cliente>
@@ -444,15 +453,15 @@ export class PropertyService {
 
 <fotos_imovel>`;
 
-    for (const img of images) {
-      xml += `
+      for (const img of images) {
+        xml += `
   <foto>
     <url>${process.env.CDN_URL}/${this.clean(img)}</url>
     <data_atualizacao>${toDateTime(lastUpdate)}</data_atualizacao>
   </foto>`;
-    }
+      }
 
-    xml += `
+      xml += `
 </fotos_imovel>
 
 <data_atualizacao>${toDateTime(lastUpdate)}</data_atualizacao>
@@ -474,126 +483,126 @@ export class PropertyService {
 <periodo_locacao></periodo_locacao>
 
 </imovel>\n`;
-  }
-
-  xml += `</imoveis>\n</Document>`;
-  return xml;
-}
-
-private mapFinalidade(value: string): string {
-  if (!value) return '';
-
-  const v = value.toLowerCase();
-
-  if (v.includes('resid')) return 'RE';     // Residencial
-  if (v.includes('comer')) return 'CO';     // Comercial
-  if (v.includes('terr')) return 'RU';      // Terreno (Rural no portal)
-  if (v.includes('empre')) return 'CO';     // Empreendimento = Comercial
-
-  return '';
-}
-
-private mapTransaction(value: string): string {
-  if (!value) return '';
-  const v = value.toLowerCase();
-
-  if (v.includes('venda')) return 'V';
-  if (v.includes('aluguel') || v.includes('locação')) return 'L';
-  if (v.includes('temporada')) return 'L'; // Portal não aceita T
-
-  return '';
-}
-
-private mapTransaction2(value: string): string {
-  if (!value) return '';
-  const v = value.toLowerCase();
-
-  if (v.includes('venda') && (v.includes('aluguel') || v.includes('locação'))) {
-    return 'L';
-  }
-
-  return '';
-}
-
-private mapTipo(value: string, finalidade: string = ''): string {
-  if (!value) return '';
-
-  const v = value.toLowerCase();
-  const f = finalidade.toUpperCase(); // RE ou CO
-
-  // ----------------------------
-  // RESIDENCIAL (RE)
-  // ----------------------------
-  if (f === 'RE') {
-    if (v.includes('apart')) return 'Apartamento';
-    if (v.includes('casa') || v.includes('sobr')) return 'Casa / Sobrado';
-    if (v.includes('cond')) return 'Casa / Sobrado em Condomínio';
-    if (v.includes('cob')) return 'Cobertura';
-    if (v.includes('flat')) return 'Flat';
-    if (v.includes('kit') || v.includes('stú') || v.includes('stu')) return 'Kitnet / Stúdio';
-    if (v.includes('loft')) return 'Loft';
-    if (v.includes('sítio') || v.includes('sitio') || v.includes('chác') || v.includes('chac')) return 'Sítio / Chácara';
-    if (v.includes('terr')) return 'Terreno / Lote';
-    if (v.includes('condomínio') && v.includes('terr')) return 'Terreno em Condomínio';
-  }
-
-  // ----------------------------
-  // COMERCIAL (CO)
-  // ----------------------------
-  if (f === 'CO') {
-    if (v.includes('casa') || v.includes('sobr')) return 'Casa / Sobrado Comercial';
-    if (v.includes('sala') || v.includes('conj')) return 'Conj. Comercial / Sala';
-    if (v.includes('fazenda')) return 'Fazenda';
-    if (v.includes('galp') || v.includes('depósito') || v.includes('deposito')) return 'Galpão / Depósito';
-    if (v.includes('gar')) return 'Garagem';
-    if (v.includes('ponto')) return 'Ponto Comercial';
-    if (v.includes('prédio') || v.includes('predio')) return 'Prédio';
-    if (v.includes('terr')) return 'Terreno comercial';
-  }
-
-  return value;
-}
-
-
-private mapValor(p: any): string {
-  const t = p.transacao?.toLowerCase() ?? '';
-
-  if (t.includes('venda') && !t.includes('aluguel')) {
-    return this.clean(p.valor);
-  }
-
-  if (t.includes('aluguel') || t.includes('locação') || t.includes('temporada')) {
-    return this.clean(p.valor_locacao ?? p.valor);
-  }
-
-  return this.clean(p.valor);
-}
-
-private mapValorLocacao(p: any): string {
-  const t = p.transacao?.toLowerCase() ?? '';
-
-  // Se for locação OU temporada, usa valor_locacao
-  if (t.includes('aluguel') || t.includes('locação') || t.includes('temporada')) {
-    // Se existir valor específico para locação, usa
-    if (p.valor_locacao && Number(p.valor_locacao) > 0) {
-      return this.clean(p.valor_locacao);
     }
 
-    // Se não existir, usa p.valor como fallback
+    xml += `</imoveis>\n</Document>`;
+    return xml;
+  }
+
+  private mapFinalidade(value: string): string {
+    if (!value) return '';
+
+    const v = value.toLowerCase();
+
+    if (v.includes('resid')) return 'RE';     // Residencial
+    if (v.includes('comer')) return 'CO';     // Comercial
+    if (v.includes('terr')) return 'RU';      // Terreno (Rural no portal)
+    if (v.includes('empre')) return 'CO';     // Empreendimento = Comercial
+
+    return '';
+  }
+
+  private mapTransaction(value: string): string {
+    if (!value) return '';
+    const v = value.toLowerCase();
+
+    if (v.includes('venda')) return 'V';
+    if (v.includes('aluguel') || v.includes('locação')) return 'L';
+    if (v.includes('temporada')) return 'L'; // Portal não aceita T
+
+    return '';
+  }
+
+  private mapTransaction2(value: string): string {
+    if (!value) return '';
+    const v = value.toLowerCase();
+
+    if (v.includes('venda') && (v.includes('aluguel') || v.includes('locação'))) {
+      return 'L';
+    }
+
+    return '';
+  }
+
+  private mapTipo(value: string, finalidade: string = ''): string {
+    if (!value) return '';
+
+    const v = value.toLowerCase();
+    const f = finalidade.toUpperCase(); // RE ou CO
+
+    // ----------------------------
+    // RESIDENCIAL (RE)
+    // ----------------------------
+    if (f === 'RE') {
+      if (v.includes('apart')) return 'Apartamento';
+      if (v.includes('casa') || v.includes('sobr')) return 'Casa / Sobrado';
+      if (v.includes('cond')) return 'Casa / Sobrado em Condomínio';
+      if (v.includes('cob')) return 'Cobertura';
+      if (v.includes('flat')) return 'Flat';
+      if (v.includes('kit') || v.includes('stú') || v.includes('stu')) return 'Kitnet / Stúdio';
+      if (v.includes('loft')) return 'Loft';
+      if (v.includes('sítio') || v.includes('sitio') || v.includes('chác') || v.includes('chac')) return 'Sítio / Chácara';
+      if (v.includes('terr')) return 'Terreno / Lote';
+      if (v.includes('condomínio') && v.includes('terr')) return 'Terreno em Condomínio';
+    }
+
+    // ----------------------------
+    // COMERCIAL (CO)
+    // ----------------------------
+    if (f === 'CO') {
+      if (v.includes('casa') || v.includes('sobr')) return 'Casa / Sobrado Comercial';
+      if (v.includes('sala') || v.includes('conj')) return 'Conj. Comercial / Sala';
+      if (v.includes('fazenda')) return 'Fazenda';
+      if (v.includes('galp') || v.includes('depósito') || v.includes('deposito')) return 'Galpão / Depósito';
+      if (v.includes('gar')) return 'Garagem';
+      if (v.includes('ponto')) return 'Ponto Comercial';
+      if (v.includes('prédio') || v.includes('predio')) return 'Prédio';
+      if (v.includes('terr')) return 'Terreno comercial';
+    }
+
+    return value;
+  }
+
+
+  private mapValor(p: any): string {
+    const t = p.transacao?.toLowerCase() ?? '';
+
+    if (t.includes('venda') && !t.includes('aluguel')) {
+      return this.clean(p.valor);
+    }
+
+    if (t.includes('aluguel') || t.includes('locação') || t.includes('temporada')) {
+      return this.clean(p.valor_locacao ?? p.valor);
+    }
+
     return this.clean(p.valor);
   }
 
-  // Para imóveis de venda → campo deve ir vazio
-  return '';
-}
+  private mapValorLocacao(p: any): string {
+    const t = p.transacao?.toLowerCase() ?? '';
+
+    // Se for locação OU temporada, usa valor_locacao
+    if (t.includes('aluguel') || t.includes('locação') || t.includes('temporada')) {
+      // Se existir valor específico para locação, usa
+      if (p.valor_locacao && Number(p.valor_locacao) > 0) {
+        return this.clean(p.valor_locacao);
+      }
+
+      // Se não existir, usa p.valor como fallback
+      return this.clean(p.valor);
+    }
+
+    // Para imóveis de venda → campo deve ir vazio
+    return '';
+  }
 
 
-private cleanNeighborhood(value: string): string {
-  if (!value) return '';
-  return String(value)
-    .split('-')[0]   // Remove tudo após " - "
-    .split('(')[0]   // Remove tudo após "("
-    .trim();
-}
+  private cleanNeighborhood(value: string): string {
+    if (!value) return '';
+    return String(value)
+      .split('-')[0]   // Remove tudo após " - "
+      .split('(')[0]   // Remove tudo após "("
+      .trim();
+  }
 
 }
