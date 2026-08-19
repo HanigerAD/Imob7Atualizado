@@ -143,32 +143,71 @@ export class SearchComponent implements OnInit, OnDestroy {
     );
   }
 
-  public removeNeighborhood(neighborhood: NeighborhoodModel): void {
-    const index = this.selectedNeighborhoods.findIndex(n => n.code === neighborhood.code);
-    if (index >= 0) {
-      this.selectedNeighborhoods.splice(index, 1);
-      this.updateNeighborhoodFormValue();
-      // Reset input field after removing
-      if (this.neighborhoodInput) {
-        this.neighborhoodInput.nativeElement.value = '';
-      }
-    }
-  }
+  public filterNeighborhoods(event: Event): void {
+  const value = (event.target as HTMLInputElement).value || '';
+  const search = this.normalizeText(value);
 
-  public selectNeighborhood(event: MatAutocompleteSelectedEvent): void {
-    const neighborhood = event.option.value as NeighborhoodModel;
-    if (!this.selectedNeighborhoods.find(n => n.code === neighborhood.code)) {
-      this.selectedNeighborhoods.push(neighborhood);
-      this.updateNeighborhoodFormValue();
-    }
-    // Clear the input field after selection
+  this.filteredNeighborhoods = this.neighborhoods.filter(neighborhood => {
+    const description = this.normalizeText(neighborhood.description || '');
+
+    const alreadySelected = this.selectedNeighborhoods.some(
+      selected => selected.code === neighborhood.code
+    );
+
+    return !alreadySelected && description.includes(search);
+  });
+}
+
+private normalizeText(value: string): string {
+  return value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
+  public removeNeighborhood(neighborhood: NeighborhoodModel): void {
+  const index = this.selectedNeighborhoods.findIndex(
+    n => n.code === neighborhood.code
+  );
+
+  if (index >= 0) {
+    this.selectedNeighborhoods.splice(index, 1);
+    this.updateNeighborhoodFormValue();
+
     if (this.neighborhoodInput) {
       this.neighborhoodInput.nativeElement.value = '';
-      // Remove focus to the input to allow multiple selections
-      this.neighborhoodInput.nativeElement.blur();
     }
+
+    this.filteredNeighborhoods = this.neighborhoods.filter(
+      item =>
+        !this.selectedNeighborhoods.some(
+          selected => selected.code === item.code
+        )
+    );
+  }
+}
+
+  public selectNeighborhood(event: MatAutocompleteSelectedEvent): void {
+  const neighborhood = event.option.value as NeighborhoodModel;
+
+  if (!this.selectedNeighborhoods.find(n => n.code === neighborhood.code)) {
+    this.selectedNeighborhoods.push(neighborhood);
+    this.updateNeighborhoodFormValue();
   }
 
+  if (this.neighborhoodInput) {
+    this.neighborhoodInput.nativeElement.value = '';
+
+    this.filteredNeighborhoods = this.neighborhoods.filter(
+      item =>
+        !this.selectedNeighborhoods.some(
+          selected => selected.code === item.code
+        )
+    );
+
+    this.neighborhoodInput.nativeElement.blur();
+  }
+}
   private updateNeighborhoodFormValue(): void {
     this.searchForm.patchValue({
       neighborhood: this.selectedNeighborhoods.map(n => n.code)
