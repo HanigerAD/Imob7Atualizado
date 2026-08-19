@@ -33,6 +33,7 @@ import { PropertyBasicDataService } from "../service/property-basic-data.service
 import { PropertyService } from "../service/property.service";
 import { PropertyDetailResponse } from "./../integration/response/property-detail.response";
 import { ImageSortRequest } from "../integration/request/image-sort.request";
+import { FeaturedSortRequest } from "../integration/request/featured-sort.request";
 import { PropertyDocumentResponse } from "../integration/response/property-document.response";
 import { LogRequest } from "../integration/request/log.request";
 import { LogResponse } from "../integration/response/log.response";
@@ -95,6 +96,15 @@ export class PropertyController {
   @HttpCode(HttpStatus.OK)
   public async updateImagesSort(@Body() imagesSort: ImageSortRequest[]): Promise<void> {
     return this.service.updateImagesSort(imagesSort);
+  }
+
+  @Put("properties/featured-sort")
+  @UseGuards(JwtAuthGuard)
+  @HttpCode(HttpStatus.OK)
+  public async updateFeaturedSort(
+    @Body() featuredSort: FeaturedSortRequest[]
+  ): Promise<void> {
+    return this.service.updateFeaturedSort(featuredSort);
   }
 
   @Patch("properties/:code/delete-images")
@@ -280,11 +290,11 @@ export class PropertyController {
   }
 
   @Get("feed.xml")
-public async getFeed(@Res() res: Response): Promise<void> {
-  const xml = await this.service.getFeedXml();
+  public async getFeed(@Res() res: Response): Promise<void> {
+    const xml = await this.service.getFeedXml();
 
-  res.setHeader("Content-Type", "application/xml");
-  res.status(200).send(xml);
-}
+    res.setHeader("Content-Type", "application/xml");
+    res.status(200).send(xml);
+  }
 
 }

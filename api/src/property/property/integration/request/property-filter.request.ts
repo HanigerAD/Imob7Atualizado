@@ -9,12 +9,14 @@ export class PropertyFilterRequest {
     public zone?: number;
     public hectare?: number;
     public code?: number;
-    public page: number;
-    public perPage: number;
+    public page?: number;
+    public perPage?: number;
     public financeable?: number;
     public showSite?: number;
     public category?: string;
     public bedroom?: number;
     public parkingVacancy?: number;
     public bathroom?: number;
+    public featured?: boolean | string | number;
+    public excludeType?: number;
 }

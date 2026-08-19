@@ -16,9 +16,26 @@ export class PropertyFilterMapper {
       .zona(request?.zone)
       .municipio(request?.city)
       .tipo(request?.type)
+      .tipo_excluido(
+        request?.excludeType !== undefined
+          ? Number(request.excludeType)
+          : undefined
+      )
       .paginacao(this.generatePaginationFilter(request))
       .preco(this.generatePriceFilter(request))
       .financiavel(request?.financeable)
+      .destaque(
+        request?.featured === undefined
+          ? undefined
+          : (
+            request.featured === true ||
+            request.featured === 'true' ||
+            request.featured === 1 ||
+            request.featured === '1'
+          )
+            ? 1
+            : 0
+      )
       .exibir(request?.showSite)
       .categoria(request.category)
       .zona(request.zone)

@@ -14,6 +14,7 @@ import { PropertyEntity } from '../entity/property.entity';
 import { AgentEntity } from './../../../agent/entity/agent.entity';
 import { PropertyFilterEntity } from './../entity/property-filter.entity';
 import { ImageSortRequest } from "../integration/request/image-sort.request";
+import { FeaturedSortRequest } from "../integration/request/featured-sort.request";
 import { PropertyDocumentEntity } from "../entity/property-document.entity";
 import { LogEntity } from "../entity/log.entity";
 import { SituationEntity } from "../../../user/entity/situation.entity";
@@ -159,6 +160,11 @@ export class PropertyRepository {
           break;
         }
 
+        case 'tipo_excluido': {
+          queryBuilder.where('imovel.tipo', '<>', filterValue);
+          break;
+        }
+
         default: {
           queryBuilder.where(`imovel.${filterKey}`, '=', filterValue);
           break;
@@ -197,7 +203,15 @@ export class PropertyRepository {
       .modify(queryBuilder => this.getAllQueryBuilder(queryBuilder, filters))
       .offset(since)
       .limit(perPage)
-      .orderBy('imovel.codigo', 'DESC');
+      .modify(queryBuilder => {
+        if (Number(filters.destaque) === 1) {
+          queryBuilder.orderByRaw(
+            'imovel.ordem_destaque IS NULL ASC, imovel.ordem_destaque ASC, imovel.codigo DESC'
+          );
+        } else {
+          queryBuilder.orderBy('imovel.codigo', 'DESC');
+        }
+      });
   }
 
   public async getAllCounter(filters: PropertyFilterEntity): Promise<number> {
@@ -469,6 +483,13 @@ export class PropertyRepository {
       .where('foto', imageSort.path);
   }
 
+  public updateFeaturedSort(featuredSort: FeaturedSortRequest): Promise<number> {
+    return this.knex
+      .update('ordem_destaque', featuredSort.index)
+      .from('imovel')
+      .where('codigo', featuredSort.code);
+  }
+
   public insertLog(logEntity: LogEntity): Promise<number> {
     return this.knex
       .insert({
@@ -508,27 +529,27 @@ export class PropertyRepository {
   }
 
   public async getAllForXml(): Promise<any[]> {
-  return this.knex
-    .select(
-      'imovel.*',
-      'area_total as areaTotal',
-      'transacao_imovel.descricao as transacao',
-      'categoria_imovel.descricao as categoria',
-      'zona_imovel.descricao as zona',
-      'unidade_federativa.descricao as uf',
-      'municipio.descricao as municipio',
-      'bairro.descricao as bairro',
-      'tipo_imovel.descricao as tipo_descricao'
-    )
-    .from('imovel')
-    .leftJoin('categoria_imovel', 'categoria_imovel.codigo', 'imovel.categoria')
-    .leftJoin('zona_imovel', 'zona_imovel.codigo', 'imovel.zona')
-    .leftJoin('bairro', 'bairro.codigo', 'imovel.bairro')
-    .leftJoin('municipio', 'municipio.codigo', 'bairro.municipio')
-    .leftJoin('unidade_federativa', 'unidade_federativa.codigo', 'municipio.unidade_federativa')
-    .leftJoin('transacao_imovel', 'transacao_imovel.codigo', 'imovel.transacao')
-    .leftJoin('tipo_imovel', 'tipo_imovel.codigo', 'imovel.tipo')
-    .orderBy('imovel.codigo', 'DESC');
-}
+    return this.knex
+      .select(
+        'imovel.*',
+        'area_total as areaTotal',
+        'transacao_imovel.descricao as transacao',
+        'categoria_imovel.descricao as categoria',
+        'zona_imovel.descricao as zona',
+        'unidade_federativa.descricao as uf',
+        'municipio.descricao as municipio',
+        'bairro.descricao as bairro',
+        'tipo_imovel.descricao as tipo_descricao'
+      )
+      .from('imovel')
+      .leftJoin('categoria_imovel', 'categoria_imovel.codigo', 'imovel.categoria')
+      .leftJoin('zona_imovel', 'zona_imovel.codigo', 'imovel.zona')
+      .leftJoin('bairro', 'bairro.codigo', 'imovel.bairro')
+      .leftJoin('municipio', 'municipio.codigo', 'bairro.municipio')
+      .leftJoin('unidade_federativa', 'unidade_federativa.codigo', 'municipio.unidade_federativa')
+      .leftJoin('transacao_imovel', 'transacao_imovel.codigo', 'imovel.transacao')
+      .leftJoin('tipo_imovel', 'tipo_imovel.codigo', 'imovel.tipo')
+      .orderBy('imovel.codigo', 'DESC');
+  }
 
 }

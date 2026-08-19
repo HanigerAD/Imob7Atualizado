@@ -13,10 +13,12 @@ export class PropertyFilterEntity {
     public preco?: PriceFilterEntity;
     public paginacao?: PaginationEntity;
     public financiavel?: number;
+    public destaque?: number;
     public categoria?: string;
     public exibir?: number;
     public banheiro?: number;
     public vaga?: number;
     public dormitorio?: number;
     public agenciador?: number;
+    public tipo_excluido?: number;
 }

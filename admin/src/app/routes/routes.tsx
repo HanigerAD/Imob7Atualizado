@@ -25,6 +25,7 @@ import { PostagemPage } from "../components/pages/postagens/postagem-page";
 import { PostagensPage } from "../components/pages/postagens/postagens-page";
 import { UsuarioPage } from "../components/pages/usuarios/usuario-page";
 import { UsuariosPage } from "../components/pages/usuarios/usuarios-page";
+import { DestaquesHomePage } from "../components/pages/destaques-home/destaques-home-page";
 
 export const Routes = () => (
   <RrdRoutes>
@@ -37,6 +38,7 @@ export const Routes = () => (
       <Route path="imoveis/cadastrar" element={<ImovelPage />} />
       <Route path="imoveis/:code" element={<ImovelPage />} />
       <Route path="imoveis" element={<ImoveisPage />} />
+      <Route path="destaques-home" element={<DestaquesHomePage />} />
       <Route path="postagens/cadastrar" element={<PostagemPage />} />
       <Route path="postagens/:code" element={<PostagemPage />} />
       <Route path="postagens" element={<PostagensPage />} />

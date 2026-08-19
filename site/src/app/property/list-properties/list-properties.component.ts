@@ -116,12 +116,19 @@ private carregarFiltrosSalvos(): void {
 
     // ✅ Recarrega a busca automaticamente se a URL tiver parâmetros (corrige o “voltar do detalhe”)
     this.route.queryParams.subscribe(params => {
-      if (Object.keys(params).length > 0) {
-        this.filters = { ...this.filters, ...params };
-        this.generateForm();
-        this.getProperties();
-      }
-    });
+  if (Object.keys(params).length > 0) {
+    this.filters = {
+      ...this.filters,
+      ...params,
+      financeable: params.financeable !== undefined
+        ? Number(params.financeable)
+        : this.filters.financeable
+    };
+
+    this.generateForm();
+    this.getProperties();
+  }
+});
   }
 
   public ngOnChanges(): void {

@@ -13,6 +13,7 @@ export class FeaturedPropertiesMapper {
         .perPage(6)
         .finality(finality)
         .featured(true)
+        .excludeType(4)
         .build();
     } else {
       return Builder<SearchModel>()
@@ -21,6 +22,15 @@ export class FeaturedPropertiesMapper {
         .featured(true)
         .build();
     }
+  }
+
+  public static mapFilterFeaturedEnterprises(): SearchModel {
+    return Builder<SearchModel>()
+      .page(1)
+      .perPage(6)
+      .type(4)
+      .featured(true)
+      .build();
   }
 
 }
