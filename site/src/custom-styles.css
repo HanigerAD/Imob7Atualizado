@@ -196,7 +196,205 @@ header .ngx-slider .ngx-slider-bubble {
   }
 }
 
+/* ======================================================
+   ACESSIBILIDADE
+   ====================================================== */
+
+/* ======================================================
+   ALTO CONTRASTE
+   ====================================================== */
+
+body.a11y-high-contrast {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+/* Estrutura principal */
+body.a11y-high-contrast .app,
+body.a11y-high-contrast section,
+body.a11y-high-contrast .wrap__heading,
+body.a11y-high-contrast footer {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+/* Navbar */
+body.a11y-high-contrast .navbar,
+body.a11y-high-contrast .navbar-transparent {
+  background: #000 !important;
+  background-color: #000 !important;
+}
+
+body.a11y-high-contrast .navbar a,
+body.a11y-high-contrast .navbar .nav-link {
+  color: #ffff00 !important;
+}
+
+/* Títulos e textos */
+body.a11y-high-contrast h1,
+body.a11y-high-contrast h2,
+body.a11y-high-contrast h3,
+body.a11y-high-contrast h4,
+body.a11y-high-contrast h5,
+body.a11y-high-contrast h6,
+body.a11y-high-contrast p,
+body.a11y-high-contrast span,
+body.a11y-high-contrast label {
+  color: #fff !important;
+}
+
+/* Links */
+body.a11y-high-contrast a:not(.btn):not(.whatsapp-floating) {
+  color: #ffff00 !important;
+}
+
+/* Cards dos imóveis */
+body.a11y-high-contrast .card,
+body.a11y-high-contrast .card__image,
+body.a11y-high-contrast .card__image-body,
+body.a11y-high-contrast .card__image-footer {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+body.a11y-high-contrast .card__image h6,
+body.a11y-high-contrast .card__image p,
+body.a11y-high-contrast .card__content span {
+  color: #fff !important;
+}
+
+/* Mantém as fotos dos imóveis normais */
+body.a11y-high-contrast .image-watermark,
+body.a11y-high-contrast .image-watermark img,
+body.a11y-high-contrast img {
+  background-color: transparent !important;
+}
+
+/* Formulários */
+body.a11y-high-contrast .form-control,
+body.a11y-high-contrast input,
+body.a11y-high-contrast select,
+body.a11y-high-contrast textarea {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+}
+
+body.a11y-high-contrast input::placeholder,
+body.a11y-high-contrast textarea::placeholder {
+  color: #ddd !important;
+}
+
+/* Dropdowns */
+body.a11y-high-contrast .dropdown-menu,
+body.a11y-high-contrast .dropdown-item {
+  background: #000 !important;
+  color: #ffff00 !important;
+}
+
+/* Botões */
+body.a11y-high-contrast .btn {
+  background: #000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
+
+body.a11y-high-contrast .btn-primary {
+  background: #000 !important;
+  color: #ffff00 !important;
+  border-color: #ffff00 !important;
+}
+
+/* Badges e etiquetas */
+body.a11y-high-contrast .badge,
+body.a11y-high-contrast .custom-card-info-item {
+  background: #000 !important;
+  color: #ffff00 !important;
+  border: 1px solid #ffff00 !important;
+}
+
+/* Modais */
+body.a11y-high-contrast .modal-content {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #fff !important;
+}
+
+/* Painel de acessibilidade */
+body.a11y-high-contrast .accessibility-panel {
+  background: #000 !important;
+  color: #fff !important;
+  border: 2px solid #ffff00 !important;
+}
+
+body.a11y-high-contrast .accessibility-option,
+body.a11y-high-contrast .accessibility-reset,
+body.a11y-high-contrast .accessibility-font-controls button {
+  background: #000 !important;
+  color: #ffff00 !important;
+  border: 1px solid #ffff00 !important;
+}
+
+body.a11y-high-contrast .accessibility-option.active {
+  background: #ffff00 !important;
+  color: #000 !important;
+}
+
+/* Botão da acessibilidade */
+body.a11y-high-contrast .accessibility-trigger {
+  background: #000 !important;
+  color: #ffff00 !important;
+  border: 2px solid #ffff00 !important;
+}
 
 
+/* ESCALA DE CINZA */
+body.a11y-grayscale {
+  filter: grayscale(100%);
+}
 
+
+/* DESTACAR LINKS */
+body.a11y-highlight-links a {
+  text-decoration: underline !important;
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+
+/* FONTE MAIS LEGÍVEL */
+body.a11y-readable-font,
+body.a11y-readable-font * {
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+/* BANNER "ENCONTRE O MELHOR LUGAR PARA VIVER" - ALTO CONTRASTE */
+body.a11y-high-contrast .home__about {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Máscara amarela somente sobre este banner */
+body.a11y-high-contrast .home__about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 215, 0, 0.68);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Mantém o conteúdo acima da máscara */
+body.a11y-high-contrast .home__about > .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Texto preto no modo de alto contraste */
+body.a11y-high-contrast .home__about h2,
+body.a11y-high-contrast .home__about p {
+  color: #000 !important;
+  text-shadow: none !important;
+}
 

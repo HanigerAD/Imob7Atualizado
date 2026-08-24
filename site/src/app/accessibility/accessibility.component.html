@@ -1,0 +1,100 @@
+<button
+  type="button"
+  class="accessibility-trigger"
+  aria-label="Abrir opções de acessibilidade"
+  [attr.aria-expanded]="panelOpen"
+  (click)="togglePanel()"
+>
+  <span class="material-icons accessibility-symbol" aria-hidden="true">
+  accessibility_new
+</span>
+  <span class="accessibility-label">Acessibilidade</span>
+</button>
+
+<div
+  class="accessibility-panel"
+  *ngIf="panelOpen"
+  role="dialog"
+  aria-label="Opções de acessibilidade"
+>
+  <div class="accessibility-panel-header">
+    <strong>Acessibilidade</strong>
+
+    <button
+      type="button"
+      class="accessibility-close"
+      aria-label="Fechar opções de acessibilidade"
+      (click)="closePanel()"
+    >
+      ×
+    </button>
+  </div>
+
+  <div class="accessibility-panel-body">
+
+    <div class="accessibility-font-controls">
+      <button
+        type="button"
+        (click)="decreaseFont()"
+        [disabled]="fontLevel <= -1"
+      >
+        A-
+      </button>
+
+      <span>Tamanho do texto</span>
+
+      <button
+        type="button"
+        (click)="increaseFont()"
+        [disabled]="fontLevel >= 4"
+      >
+        A+
+      </button>
+    </div>
+
+    <button
+      type="button"
+      class="accessibility-option"
+      [class.active]="highContrast"
+      (click)="toggleHighContrast()"
+    >
+      Alto contraste
+    </button>
+
+    <button
+      type="button"
+      class="accessibility-option"
+      [class.active]="grayscale"
+      (click)="toggleGrayscale()"
+    >
+      Escala de cinza
+    </button>
+
+    <button
+      type="button"
+      class="accessibility-option"
+      [class.active]="highlightLinks"
+      (click)="toggleHighlightLinks()"
+    >
+      Destacar links
+    </button>
+
+    <button
+      type="button"
+      class="accessibility-option"
+      [class.active]="readableFont"
+      (click)="toggleReadableFont()"
+    >
+      Fonte mais legível
+    </button>
+
+    <button
+      type="button"
+      class="accessibility-reset"
+      (click)="reset()"
+    >
+      Restaurar padrões
+    </button>
+
+  </div>
+</div>
