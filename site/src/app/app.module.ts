@@ -52,6 +52,7 @@ import { HomepageComponent } from './homepage/homepage/homepage.component';
 import { CommonModule } from '@angular/common';
 import { HomepageService } from './shared/services/homepage.service';
 import { HomepageRestService } from './shared/services/homepage-rest.service';
+import { AccessibilityComponent } from './accessibility/accessibility.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { HomepageRestService } from './shared/services/homepage-rest.service';
     SellYourPropertyComponent,
     LoadingComponent,
     HomepageComponent,
+    AccessibilityComponent,
   ],
   imports: [
     BrowserModule,

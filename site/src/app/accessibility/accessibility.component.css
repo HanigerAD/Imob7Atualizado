@@ -1,0 +1,138 @@
+.accessibility-trigger {
+    position: fixed;
+    right: 10px;
+    bottom: 420px;
+
+    width: 45px;
+    min-width: 45px;
+    height: 45px;
+
+    padding: 0;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: #1976d2;
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+    z-index: 10000;
+    cursor: pointer;
+}
+
+.accessibility-symbol {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.accessibility-label {
+    font-size: 13px;
+    font-weight: 600;
+    display: none;
+}
+
+.accessibility-panel {
+    position: fixed;
+    right: 20px;
+    bottom: 235px;
+    width: 310px;
+    max-width: calc(100vw - 30px);
+    background: #fff;
+    color: #222;
+    border-radius: 10px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    z-index: 10001;
+}
+
+.accessibility-panel-header {
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+}
+
+.accessibility-close {
+    border: 0;
+    background: transparent;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.accessibility-panel-body {
+    padding: 14px;
+}
+
+.accessibility-font-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.accessibility-font-controls button {
+    min-width: 45px;
+    height: 38px;
+    border: 1px solid #ccc;
+    background: #f7f7f7;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.accessibility-option,
+.accessibility-reset {
+    display: block;
+    width: 100%;
+    min-height: 42px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.accessibility-option {
+    border: 1px solid #ccc;
+    background: #fff;
+    color: #222;
+}
+
+.accessibility-option.active {
+    background: #1557a0;
+    color: #fff;
+    border-color: #1557a0;
+}
+
+.accessibility-reset {
+    border: 0;
+    background: #eee;
+    text-align: center;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .accessibility-trigger {
+        right: 20px;
+        bottom: 170px;
+        width: 55px;
+        min-width: 55px;
+        padding: 0;
+    }
+
+    .accessibility-label {
+        display: none;
+    }
+
+    .accessibility-panel {
+        right: 12px;
+        bottom: 235px;
+    }
+}
