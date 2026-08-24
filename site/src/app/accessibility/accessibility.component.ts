@@ -112,7 +112,8 @@ export class AccessibilityComponent implements OnInit {
                 'h1, h2, h3, h4, h5, h6, p, a, button, label, input, select, textarea, li, span'
             )
         ).filter(element => {
-            return !element.classList.contains('material-icons') &&
+            return !element.closest('app-accessibility') &&
+                !element.classList.contains('material-icons') &&
                 !element.classList.contains('fa');
         });
 
