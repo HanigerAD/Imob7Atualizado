@@ -109,6 +109,13 @@
   animation: pulseWhats 2s infinite;
 }
 
+@media (max-width: 768px) {
+  .whatsapp-floating {
+    bottom: 125px;
+    right: 10px;
+  }
+}
+
 .whatsapp-floating svg {
   width: 28px;
   height: 28px;
