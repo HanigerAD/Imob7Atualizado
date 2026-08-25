@@ -1,6 +1,6 @@
 .accessibility-trigger {
     position: fixed;
-    right: 10px;
+    right: 7px;
     bottom: 420px;
 
     width: 45px;
@@ -120,11 +120,17 @@
 
 @media (max-width: 768px) {
     .accessibility-trigger {
-        right: 20px;
-        bottom: 170px;
-        width: 55px;
-        min-width: 55px;
+        right: 8px;
+
+        top: calc(50% - 95px);
+        bottom: auto;
+
+        width: 45px;
+        min-width: 45px;
+        height: 45px;
+
         padding: 0;
+        border-radius: 50%;
     }
 
     .accessibility-label {
@@ -132,7 +138,9 @@
     }
 
     .accessibility-panel {
-        right: 12px;
-        bottom: 235px;
+        right: 10px;
+        bottom: 225px;
+        width: calc(100vw - 20px);
+        max-width: 310px;
     }
 }

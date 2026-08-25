@@ -398,3 +398,26 @@ body.a11y-high-contrast .home__about p {
   text-shadow: none !important;
 }
 
+@media (max-width: 768px) {
+    a[href^="mailto:"] {
+        max-width: 100%;
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    a[href^="mailto:"] span {
+        max-width: 100%;
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+}
+/* Protege contra overflow horizontal em telas pequenas quando aumentar fonte pelo botão acessibilidade */
+@media (max-width: 768px) {
+    html,
+    body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+}
